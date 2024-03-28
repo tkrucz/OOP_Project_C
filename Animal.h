@@ -8,19 +8,7 @@ class Animal : public Organism {
 private:
     AnimalSpecies name;
 public:
-    Animal(int strength, int initiative, const Position &position, AnimalSpecies name);
-
-    int GetStrength() const;
-
-    void SetStrength(int new_strength);
-
-    int GetInitiative() const;
-
-    void SetInitiative(int new_initiative);
-
-    Position GetPosition() const;
-
-    void SetPosition(const Position &new_position);
+    Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
 
     AnimalSpecies GetName() const;
 

@@ -3,32 +3,8 @@
 
 using namespace std;
 
-Animal::Animal(int _strength, int _initiative, const Position &_position, AnimalSpecies _name)
-        : Organism(_strength, _initiative, _position, nullptr), name(_name) {}
-
-int Animal::GetStrength() const {
-    return strength;
-}
-
-void Animal::SetStrength(int new_strength) {
-    strength = new_strength;
-}
-
-int Animal::GetInitiative() const {
-    return initiative;
-}
-
-void Animal::SetInitiative(int new_initiative) {
-    initiative = new_initiative;
-}
-
-Position Animal::GetPosition() const {
-    return position;
-}
-
-void Animal::SetPosition(const Position &new_position) {
-    position = new_position;
-}
+Animal::Animal(int _strength, int _initiative, int _age, const Position &_position, AnimalSpecies _name)
+        : Organism(_strength, _initiative, _age, _position, nullptr), name(_name) {}
 
 AnimalSpecies Animal::GetName() const {
     return name;

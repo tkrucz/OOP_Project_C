@@ -3,10 +3,26 @@
 
 using namespace std;
 
-World::World() {
+World::World(int numRows, int numCols) : rows(numRows), cols(numCols) {
 
 }
 
-World::~World() {
+//void World::addOrganism(Organism* organism, const Position& position) {
+//
+//}
+//
+//void World::removeOrganism(Organism* organism) {
+//
+//}
+//
+//void World::makeTurn() {
+//
+//}
+//
+//void World::drawWorld() {
+//
+//}
+
+World::~World() { //REMEMBER TO FREE MEMORY
     cout << "World destruction" << endl;
 }

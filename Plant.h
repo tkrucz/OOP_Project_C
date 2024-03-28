@@ -8,15 +8,7 @@ class Plant : public Organism {
 private:
     PlantSpecies name;
 public:
-    Plant(int strength, const Position& position, PlantSpecies name);
-
-    int GetStrength() const;
-
-    void SetStrength(int new_strength);
-
-    Position GetPosition() const;
-
-    void SetPosition(const Position& new_position);
+    Plant(int strength, int age, const Position &position, PlantSpecies name);
 
     PlantSpecies GetName() const;
 
@@ -24,7 +16,7 @@ public:
 
     void Action() override;
 
-    void Collision(Organism* other_organism) override;
+    void Collision(Organism *other_organism) override;
 
     char Draw() override;
 

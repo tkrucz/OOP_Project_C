@@ -24,3 +24,8 @@ enum PlantSpecies{
     belladonna,
     Sosnowskys_hogweed
 };
+
+struct Cell{
+    Position cellCord;
+    bool isEmpty = false;
+};
