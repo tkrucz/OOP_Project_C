@@ -3,6 +3,10 @@
 
 using namespace std;
 
+World::World() {
+
+}
+
 World::~World() {
     cout << "World destruction" << endl;
 }

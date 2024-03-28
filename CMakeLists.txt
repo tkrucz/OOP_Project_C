@@ -12,4 +12,6 @@ add_executable(Code main.cpp
         Plant.h
         Animal.cpp
         Plant.cpp
-        Organism.cpp)
+        Organism.cpp
+        GeneralFunctions.h
+        GeneralFunctions.cpp)

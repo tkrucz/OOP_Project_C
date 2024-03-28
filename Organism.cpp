@@ -1,7 +1,41 @@
-#include "iostream"
 #include "Organism.h"
 
 using namespace std;
 
-Organism ::~Organism() {
+Organism::Organism(int _strength, int _initiative, const Position& _position, World* _world)
+        : strength(_strength), initiative(_initiative), position(_position), world(_world) {}
+
+int Organism::GetStrength() const {
+    return strength;
+}
+
+void Organism::SetStrength(int new_strength) {
+    strength = new_strength;
+}
+
+int Organism::GetInitiative() const {
+    return initiative;
+}
+
+void Organism::SetInitiative(int new_initiative) {
+    initiative = new_initiative;
+}
+
+Position Organism::GetPosition() const {
+    return position;
+}
+
+void Organism::SetPosition(const Position& new_position) {
+    position = new_position;
+}
+
+World* Organism::GetWorld() const {
+    return world;
+}
+
+void Organism::SetWorld(World* new_world) {
+    world = new_world;
+}
+
+Organism::~Organism() {
 }

@@ -4,6 +4,7 @@ class World{
 private:
     int organism;
 public:
+    World();
     void makeTurn();
     void drawWorld();
 
