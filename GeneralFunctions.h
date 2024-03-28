@@ -14,4 +14,6 @@ void cellChange(Cell &cell); //change cell "flag"
 
 void ageIncreasing(Organism &organism);
 
+bool operator==(const Position& lhs, const Position& rhs);
+
 #endif //CODE_GENERALFUNCTIONS_H

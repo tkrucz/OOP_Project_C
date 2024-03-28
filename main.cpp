@@ -1,6 +1,5 @@
 #include <iostream>
 #include "World.h"
-#include "GeneralFunctions.h"
 
 using namespace std;
 
@@ -11,6 +10,8 @@ int main() {
     Plant Rose{69, 1, {4, 20}, grass};
     Animal Wilk = {10, 10, 12, {10, 5}, wolf};
     Cell Origin = {{0, 0}, true};
+
+    World world(2,2);
 
     cout << Rose.GetStrength() << endl;
     cout << Wilk.GetAge() << endl;

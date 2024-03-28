@@ -31,3 +31,7 @@ void cellChange(Cell &cell) {
 void ageIncreasing(Organism &organism) {
     //organism.age ++;
 }
+
+bool operator==(const Position& lhs, const Position& rhs) {
+    return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
+}

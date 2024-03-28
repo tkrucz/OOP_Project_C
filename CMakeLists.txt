@@ -4,14 +4,16 @@ project(Code)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Code main.cpp
+        List.h
         World.h
-        Organism.h
-        Define.cpp
         World.cpp
+        Organism.h
+        Organism.cpp
+        Define.cpp
         Animal.h
         Plant.h
         Animal.cpp
         Plant.cpp
-        Organism.cpp
         GeneralFunctions.h
-        GeneralFunctions.cpp)
+        GeneralFunctions.cpp
+)
