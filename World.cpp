@@ -18,8 +18,12 @@ void World::makeTurn() {
 
 }
 
-void World::drawWorld() {
-
+void World::drawWorld() const {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++)
+            cout << "*";
+        cout << endl;
+    }
 }
 
 World::~World() { //REMEMBER TO FREE MEMORY

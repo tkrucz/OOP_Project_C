@@ -20,7 +20,7 @@ public:
 
     void makeTurn(); // Perform one turn in the world
 
-   void drawWorld(); // Draw the world (visualization)
+   void drawWorld() const; // Draw the world (visualization)
 
     ~World();
 };

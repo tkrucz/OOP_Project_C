@@ -12,7 +12,7 @@ int main() {
     Cell Origin = {{0, 0}, true};
 
     World world(2,2);
-
+    world.drawWorld();
     cout << Rose.GetStrength() << endl;
     cout << Wilk.GetAge() << endl;
     cout << Origin.isEmpty << endl;
