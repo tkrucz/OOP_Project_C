@@ -27,5 +27,5 @@ enum PlantSpecies{
 
 struct Cell{
     Position cellCord;
-    bool isEmpty = false;
+    bool isEmpty = true;
 };

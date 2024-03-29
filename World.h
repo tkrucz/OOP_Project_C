@@ -3,14 +3,15 @@
 
 #include "Organism.h"
 #include "Define.cpp"
-#include "List.h"
+#include "Vector.h"
 #include "GeneralFunctions.h"
 
 class World {
 private:
     int rows;
     int cols;
-    List<Cell> cellList;
+    Vector<Cell> cellList;
+    Vector<Organism*> organismList;
 public:
     World(int numRows, int numCols);
 
