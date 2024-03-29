@@ -42,7 +42,7 @@ public:
 
     virtual char Draw()  = 0;
 
-    virtual ~Organism();
+    ~Organism();
 };
 
 #endif //CODE_ORGANISM_H

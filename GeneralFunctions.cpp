@@ -28,10 +28,11 @@ void cellChange(Cell &cell) {
     cell.isEmpty = true;
 }
 
-void ageIncreasing(Organism &organism) {
-    //organism.age ++;
+void ageIncrease(Organism &organism) {
+    int tmp = organism.GetAge();
+    organism.SetAge(tmp + 1);
 }
 
-bool operator==(const Position& lhs, const Position& rhs) {
+bool operator==(const Position &lhs, const Position &rhs) {
     return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
 }

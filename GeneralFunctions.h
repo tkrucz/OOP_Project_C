@@ -12,7 +12,7 @@ bool cellCheck(Cell &cell); //check if cell is empty
 
 void cellChange(Cell &cell); //change cell "flag"
 
-void ageIncreasing(Organism &organism);
+void ageIncrease(Organism &organism);
 
 bool operator==(const Position& lhs, const Position& rhs);
 

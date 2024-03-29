@@ -19,9 +19,9 @@ public:
 
     void removeOrganism(Organism *organism);
 
-    void makeTurn(); // Perform one turn in the world
+    void makeTurn();
 
-   void drawWorld() const; // Draw the world (visualization)
+   void drawWorld() const;
 
     ~World();
 };

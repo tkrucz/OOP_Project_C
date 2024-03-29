@@ -6,11 +6,11 @@ using namespace std;
 Animal::Animal(int _strength, int _initiative, int _age, const Position &_position, AnimalSpecies _name)
         : Organism(_strength, _initiative, _age, _position, nullptr), name(_name) {}
 
-AnimalSpecies Animal::GetName() const {
+AnimalSpecies Animal::getSpecies() const {
     return name;
 }
 
-void Animal::SetName(AnimalSpecies new_name) {
+void Animal::setSpecies(AnimalSpecies new_name) {
     name = new_name;
 }
 
@@ -25,10 +25,18 @@ void Animal::Collision(Organism *other_organism) {
 }
 
 char Animal::Draw() {
-    // Implement drawing for animals
-    // Return a character representing the animal
-    // For example, return 'W' for wolf or 'S' for sheep
-    return 'A'; // Placeholder character
+    if(name==wolf)
+        return 'W';
+    else if (name == sheep)
+        return 'S';
+    else if (name == fox)
+        return 'F';
+    else if (name == turtle)
+        return 'T';
+    else if (name == antelope)
+        return 'A';
+    else
+        return 'H';
 }
 
 Animal::~Animal() {

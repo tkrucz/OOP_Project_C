@@ -4,19 +4,14 @@
 using namespace std;
 
 int main() {
-    animalStatsInit();
-    plantStatsInit();
-
-    Plant Rose{69, 1, {4, 20}, grass};
-    Animal Wilk = {10, 10, 12, {10, 5}, wolf};
-    Cell Origin = {{0, 0}, true};
-
-    World world(2,2);
-    world.drawWorld();
-    cout << Rose.GetStrength() << endl;
-    cout << Wilk.GetAge() << endl;
-    cout << Origin.isEmpty << endl;
-
+    //animalStatsInit();
+    //plantStatsInit();
+    Animal w (9, 5, 0, {0, 0}, AnimalSpecies::wolf);
+    Plant p(0,0,{1,0},PlantSpecies::grass);
+    World wtf(2,2);
+    wtf.addOrganism(&w,w.GetPosition());
+    wtf.addOrganism(&p,p.GetPosition());
+    wtf.drawWorld();
     cout << "Hello World" << endl;
     return 0;
 }

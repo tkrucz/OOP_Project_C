@@ -25,10 +25,16 @@ void Plant::Collision(Organism *other_organism) {
 }
 
 char Plant::Draw() {
-    // Implement drawing for plants
-    // Return a character representing the plant
-    // For example, return 'T' for tree or 'F' for flower
-    return 'P'; // Placeholder character
+    if(name==guarana)
+        return '+';
+    else if (name == sow_thistle)
+        return '*';
+    else if (name == belladonna)
+        return '?';
+    else if (name == Sosnowskys_hogweed)
+        return '!';
+    else
+        return '#';
 }
 
 Plant::~Plant() {

@@ -20,7 +20,7 @@ public:
 
     char Draw() override;
 
-    ~Plant() override;
+    ~Plant() ;
 };
 
 #endif //CODE_PLANT_H

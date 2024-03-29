@@ -21,11 +21,11 @@ void Organism::SetInitiative(int new_initiative) {
 }
 
 int Organism::GetAge() const {
-    return initiative;
+    return age;
 }
 
 void Organism::SetAge(int new_age) {
-    initiative = new_age;
+    age = new_age;
 }
 
 Position Organism::GetPosition() const {

@@ -30,12 +30,10 @@ public:
         }
     }
 
-    // Access element at the specified index
     T &getElement(int index) const {
         return elements[index];
     }
 
-    // Set element at the specified index
     void setElement(int index, const T &value) {
         elements[index] = value;
     }
@@ -46,7 +44,6 @@ public:
 
         delete elements[index];
 
-        // Shift elements to the left to fill the gap left by the removed element
         for (int i = index; i < currentSize - 1; ++i)
             elements[i] = elements[i + 1];
         --currentSize;
@@ -55,13 +52,12 @@ public:
     int getIndex(const T &value) const {
         for (int i = 0; i < currentSize; ++i) {
             if (elements[i] == value) {
-                return i; // Return the index of the value if found
+                return i;
             }
         }
-        return -1; // Return -1 if the value is not found in the vector
+        return -1;
     }
 
-    // Get the number of elements in the vector
     int Size() const {
         return currentSize;
     }

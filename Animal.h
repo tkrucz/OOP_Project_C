@@ -10,9 +10,9 @@ private:
 public:
     Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
 
-    AnimalSpecies GetName() const;
+    AnimalSpecies getSpecies() const;
 
-    void SetName(AnimalSpecies new_name);
+    void setSpecies(AnimalSpecies new_name);
 
     void Action() override;
 
@@ -20,7 +20,7 @@ public:
 
     char Draw() override;
 
-    ~Animal() override;
+    ~Animal() ;
 };
 
 #endif //CODE_ANIMAL_H
