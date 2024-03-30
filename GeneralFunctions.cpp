@@ -1,4 +1,7 @@
 #include "GeneralFunctions.h"
+#include "iostream"
+
+using namespace std;
 
 void animalStatsInit() {
     Animal wolf(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
@@ -31,6 +34,39 @@ void cellChange(Cell &cell) {
 void ageIncrease(Organism &organism) {
     int tmp = organism.GetAge();
     organism.SetAge(tmp + 1);
+}
+
+void introduction(char &key, int &rows, int &columns) {
+    cout << "Author: Tomasz Kruczalak 198049 \nWelcome to World Simulator ! " << endl;
+    cout << "Keys binding : \nm - symbols meaning \ns - start game";
+    cout << endl;
+    key = char(getchar());
+    while (key != 's') {
+        if (key == 'm') {
+            charDictionary();
+            break;
+        }
+        else if( key != '\n')
+            cout << "Wrong key" << endl;
+        key = char(getchar());
+    }
+    cout << endl;
+    worldInit(rows, columns);
+}
+
+void charDictionary() {
+    cout << "Characters for organisms :" << endl;
+    cout << "Plants : \ngrass # \nguarana + \nsow_thistle * \nbelladonna ? \nSosnowskys hogweed ! " << endl;
+    cout << "Animals : \nwolf W \nsheep S \nfox F \nturtle T \nantelope A \nHuman H " << endl;
+}
+
+void worldInit(int &rows, int &columns) {
+    cout << "Enter number of rows and columns for world initialization : " << endl;
+    cout << "Rows : ";
+    cin >> rows;
+    cout << "Columns : ";
+    cin >> columns;
+    cout << endl;
 }
 
 bool operator==(const Position &lhs, const Position &rhs) {

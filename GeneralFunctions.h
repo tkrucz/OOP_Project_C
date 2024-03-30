@@ -14,6 +14,12 @@ void cellChange(Cell &cell); //change cell "flag"
 
 void ageIncrease(Organism &organism);
 
+void introduction(char& key, int &rows, int &columns);
+
+void charDictionary();
+
+void worldInit(int &rows, int &columns);
+
 bool operator==(const Position& lhs, const Position& rhs);
 
 #endif //CODE_GENERALFUNCTIONS_H

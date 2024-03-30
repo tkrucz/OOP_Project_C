@@ -33,6 +33,7 @@ void World::makeTurn() {
 }
 
 void World::drawWorld() const {
+    cout << "WORLD STATUS :" << endl;
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             int index = i * cols + j;
@@ -50,6 +51,7 @@ void World::drawWorld() const {
         }
         cout << endl;
     }
+    cout << endl; //New line after printing the world
 }
 
 World::~World() { //REMEMBER TO FREE MEMORY
