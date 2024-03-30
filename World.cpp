@@ -10,14 +10,13 @@ void World::addOrganism(Organism *newOrganism, const Position &position) {
     newOrganism->SetPosition(position);
     organismList.push_back(newOrganism);
     int index = position.cord.y * cols + position.cord.x;
-    //cellChange(cellList.getElement(index));
     cellList.setElement(index, {position, false});
 }
 
 void World::removeOrganism(Organism *organism) {
     Position position = organism->GetPosition();
     int index = position.cord.y * cols + position.cord.x;
-    cellChange(cellList.getElement(index));
+    cellList.setElement(index, {position, true});
 
     for (int i = 0; i < organismList.Size(); ++i) {
         if (organismList.getElement(i) == organism) {

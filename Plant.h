@@ -10,10 +10,6 @@ private:
 public:
     Plant(int strength, int age, const Position &position, PlantSpecies name);
 
-    PlantSpecies GetName() const;
-
-    void SetName(PlantSpecies new_name);
-
     void Action() override;
 
     void Collision(Organism *other_organism) override;

@@ -13,7 +13,10 @@ int main() {
 
     world.addOrganism(&w, w.GetPosition());
     world.addOrganism(&p, p.GetPosition());
-
     world.drawWorld();
+
+    world.removeOrganism(&p);
+    world.drawWorld();
+
     return 0;
 }

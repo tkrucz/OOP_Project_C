@@ -58,6 +58,7 @@ void charDictionary() {
     cout << "Characters for organisms :" << endl;
     cout << "Plants : \ngrass # \nguarana + \nsow_thistle * \nbelladonna ? \nSosnowskys hogweed ! " << endl;
     cout << "Animals : \nwolf W \nsheep S \nfox F \nturtle T \nantelope A \nHuman H " << endl;
+    cout << "Empty cell _" << endl;
 }
 
 void worldInit(int &rows, int &columns) {

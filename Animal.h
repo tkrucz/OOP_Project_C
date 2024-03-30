@@ -10,10 +10,6 @@ private:
 public:
     Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
 
-    AnimalSpecies getSpecies() const;
-
-    void setSpecies(AnimalSpecies new_name);
-
     void Action() override;
 
     void Collision(Organism *other_organism) override;

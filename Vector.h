@@ -42,8 +42,6 @@ public:
         if (index < 0 || index >= currentSize)
             return;
 
-        delete elements[index];
-
         for (int i = index; i < currentSize - 1; ++i)
             elements[i] = elements[i + 1];
         --currentSize;
