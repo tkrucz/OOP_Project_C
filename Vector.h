@@ -61,7 +61,8 @@ public:
     }
 
     ~Vector() {
-        delete[] elements;
+        if(currentSize != 0)
+            delete[] elements;
     }
 };
 
