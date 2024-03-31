@@ -2,7 +2,7 @@
 #define CODE_ORGANISM_H
 
 #include "Define.cpp"
-
+#include "Vector.h"
 class World;
 
 class Organism {
@@ -11,8 +11,6 @@ protected:
     int initiative;
     int age; //start from 1, with every round age should be increased
     Position position;
-    World *world;
-
 public:
     Organism(int strength, int initiative, int age, const Position &position, World* world);
 
@@ -32,11 +30,7 @@ public:
 
     void SetPosition(const Position &new_position);
 
-    World *GetWorld() const;
-
-    void SetWorld(World *new_world);
-
-    virtual void Action() = 0;
+    virtual void Action(Vector<Cell>cellList, int &rows, int &cols) = 0;
 
     virtual void Collision(Organism *other_organism) = 0;
 

@@ -11,7 +11,7 @@ private:
     int rows;
     int cols;
     Vector<Cell> cellList;
-    Vector<Organism*> organismList;
+    Vector<Organism *> organismList;
 public:
     World(int numRows, int numCols);
 
@@ -21,7 +21,7 @@ public:
 
     void makeTurn();
 
-   void drawWorld() const;
+    void drawWorld() const;
 
     ~World();
 };

@@ -2,7 +2,7 @@
 #include "World.h"
 
 Organism::Organism(int _strength, int _initiative, int _age, const Position &_position, World *_world)
-        : strength(_strength), initiative(_initiative), age(_age), position(_position), world(_world) {}
+        : strength(_strength), initiative(_initiative), age(_age), position(_position) {}
 
 int Organism::GetStrength() const {
     return strength;
@@ -34,14 +34,6 @@ Position Organism::GetPosition() const {
 
 void Organism::SetPosition(const Position &new_position) {
     position = new_position;
-}
-
-World *Organism::GetWorld() const {
-    return world;
-}
-
-void Organism::SetWorld(World *new_world) {
-    world = new_world;
 }
 
 Organism::~Organism() {

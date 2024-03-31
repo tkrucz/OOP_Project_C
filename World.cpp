@@ -28,7 +28,9 @@ void World::removeOrganism(Organism *organism) {
 
 
 void World::makeTurn() {
-
+    for (int i = 0; i < organismList.Size(); ++i) {
+        organismList.getElement(i)->Action(cellList, rows, cols);
+    }
 }
 
 void World::drawWorld() const {
@@ -53,6 +55,6 @@ void World::drawWorld() const {
     cout << endl; //New line after printing the world
 }
 
-World::~World() { //REMEMBER TO FREE MEMORY
+World::~World() {
     cout << "World destruction" << endl;
 }

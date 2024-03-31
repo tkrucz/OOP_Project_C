@@ -6,7 +6,7 @@ using namespace std;
 Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
         : Organism(strength, 0, age, position, nullptr), name(name) {}
 
-void Plant::Action() {
+void Plant::Action(Vector<Cell>cellList, int &rows, int &cols) {
     // Implement action for plants
     // For example, plants may grow or reproduce in their action method
 }

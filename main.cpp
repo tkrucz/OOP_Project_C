@@ -1,8 +1,8 @@
 #include "World.h"
 
 int main() {
-    //animalStatsInit();
-    //plantStatsInit();
+    //animalStatsInit(); Necessary ?
+    //plantStatsInit(); Necessary ?
     char key;
     int rows, columns;
     introduction(key, rows,columns);
@@ -16,6 +16,9 @@ int main() {
     world.drawWorld();
 
     world.removeOrganism(&p);
+    world.drawWorld();
+
+    world.makeTurn(); //DEBUG !!!
     world.drawWorld();
 
     return 0;

@@ -10,7 +10,7 @@ private:
 public:
     Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
 
-    void Action() override;
+    void Action(Vector<Cell>cellList, int &rows, int &cols) override;
 
     void Collision(Organism *other_organism) override;
 
