@@ -19,10 +19,10 @@ enum AnimalSpecies{
 
 enum PlantSpecies{
     grass,
-    sow_thistle,
+    sowThistle,
     guarana,
     belladonna,
-    Sosnowskys_hogweed
+    sosnowskysHogweed
 };
 
 struct Cell{

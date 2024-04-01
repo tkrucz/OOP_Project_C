@@ -3,6 +3,7 @@
 
 #include "Define.cpp"
 #include "Vector.h"
+
 class World;
 
 class Organism {
@@ -12,27 +13,27 @@ protected:
     int age; //start from 1, with every round age should be increased
     Position position;
 public:
-    Organism(int strength, int initiative, int age, const Position &position, World* world);
+    Organism(int strength, int initiative, int age, const Position &position);
 
     int GetStrength() const;
 
-    void SetStrength(int new_strength);
+    void SetStrength(int newStrength);
 
     int GetInitiative() const;
 
-    void SetInitiative(int new_initiative);
+    void SetInitiative(int newInitiative);
 
     int GetAge() const ;
 
-    void SetAge(int new_age);
+    void SetAge(int newAge);
 
     Position GetPosition() const;
 
-    void SetPosition(const Position &new_position);
+    void SetPosition(const Position &newPosition);
 
     virtual void Action(Vector<Cell>cellList, int &rows, int &cols) = 0;
 
-    virtual void Collision(Organism *other_organism) = 0;
+    virtual void Collision(Organism *otherOrganism, World &world) = 0;
 
     virtual char Draw()  = 0;
 

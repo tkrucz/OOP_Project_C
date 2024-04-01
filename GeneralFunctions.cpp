@@ -13,10 +13,10 @@ void animalStatsInit() {
 
 void plantStatsInit() {
     Plant grass(0, 0, {0, 0}, PlantSpecies::grass);
-    Plant sow_thistle(0, 0, {0, 0}, PlantSpecies::sow_thistle);
+    Plant sow_thistle(0, 0, {0, 0}, PlantSpecies::sowThistle);
     Plant guarana(0, 0, {0, 0}, PlantSpecies::guarana);
     Plant belladonna(99, 0, {0, 0}, PlantSpecies::belladonna);
-    Plant Sosnowskys_hogweed(10, 0, {0, 0}, PlantSpecies::Sosnowskys_hogweed);
+    Plant Sosnowskys_hogweed(10, 0, {0, 0}, PlantSpecies::sosnowskysHogweed);
 }
 
 bool cellCheck(Cell &cell) {
@@ -68,8 +68,4 @@ void worldInit(int &rows, int &columns) {
     cout << "Columns : ";
     cin >> columns;
     cout << endl;
-}
-
-bool operator==(const Position &lhs, const Position &rhs) {
-    return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
 }

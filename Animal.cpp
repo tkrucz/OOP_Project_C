@@ -3,8 +3,8 @@
 
 using namespace std;
 
-Animal::Animal(int _strength, int _initiative, int _age, const Position &_position, AnimalSpecies _name)
-        : Organism(_strength, _initiative, _age, _position, nullptr), name(_name) {}
+Animal::Animal(int strength, int initiative, int age, const Position &_position, AnimalSpecies name)
+        : Organism(strength, initiative, age, _position), name(name) {}
 
 void Animal::Action(Vector<Cell> cellList, int &rows, int &cols) {
     int xCord = position.cord.x, yCord = position.cord.y;
@@ -47,10 +47,16 @@ void Animal::Action(Vector<Cell> cellList, int &rows, int &cols) {
     }
 }
 
-
-void Animal::Collision(Organism *other_organism) {
-    // Implement collision behavior for animals
-    // For example, interaction with other organisms
+void Animal::Collision(Organism *other_organism, World &world) {
+    int predatorStr = strength;
+    int defenderStr = other_organism->GetStrength();
+    if (predatorStr >= defenderStr) {
+        cout << "Predator wins!" << endl;
+        //world.removeOrganism(other_organism); xd
+    } else {
+        cout << "Defender wins!" << endl;
+        //world.removeOrganism(this); XD
+    }
 }
 
 char Animal::Draw() {

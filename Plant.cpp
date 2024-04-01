@@ -4,14 +4,14 @@
 using namespace std;
 
 Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
-        : Organism(strength, 0, age, position, nullptr), name(name) {}
+        : Organism(strength, 0, age, position), name(name) {}
 
 void Plant::Action(Vector<Cell>cellList, int &rows, int &cols) {
     // Implement action for plants
     // For example, plants may grow or reproduce in their action method
 }
 
-void Plant::Collision(Organism *other_organism) {
+void Plant::Collision(Organism *other_organism, World &world) {
     // Implement collision behavior for plants
     // For example, interaction with other organisms
 }
@@ -19,11 +19,11 @@ void Plant::Collision(Organism *other_organism) {
 char Plant::Draw() {
     if(name==guarana)
         return '+';
-    else if (name == sow_thistle)
+    else if (name == sowThistle)
         return '*';
     else if (name == belladonna)
         return '?';
-    else if (name == Sosnowskys_hogweed)
+    else if (name == sosnowskysHogweed)
         return '!';
     else
         return '#';

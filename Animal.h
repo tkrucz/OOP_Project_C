@@ -12,7 +12,7 @@ public:
 
     void Action(Vector<Cell>cellList, int &rows, int &cols) override;
 
-    void Collision(Organism *other_organism) override;
+    void Collision(Organism *otherOrganism, World &world) override;
 
     char Draw() override;
 
