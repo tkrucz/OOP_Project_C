@@ -10,7 +10,7 @@ private:
 public:
     Plant(int strength, int age, const Position &position, PlantSpecies name);
 
-    void Action(Vector<Cell>cellList, Vector<Organism *> organismList, World &world, int &rows, int &cols) override;
+    void Action(Vector<Cell>cellList, int &rows, int &cols) override;
 
     void Collision(Organism *otherOrganism, World &world) override;
 

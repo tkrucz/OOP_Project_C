@@ -8,7 +8,7 @@ using namespace std;
 Animal::Animal(int strength, int initiative, int age, const Position &_position, AnimalSpecies name)
         : Organism(strength, initiative, age, _position), name(name) {}
 
-void Animal::Action(Vector<Cell> cellList, Vector<Organism *> organismList, World &world, int &rows, int &cols) {
+void Animal::Action(Vector<Cell> cellList, int &rows, int &cols) {
     int xCord = position.cord.x, yCord = position.cord.y;
     int possibleMoves[4] = {0, 0, 0, 0};
     int tmp = 0;
@@ -20,48 +20,47 @@ void Animal::Action(Vector<Cell> cellList, Vector<Organism *> organismList, Worl
         possibleMoves[tmp++] = 3;
     if (yCord - 1 >= 0)
         possibleMoves[tmp++] = 4;
-
-    if (tmp > 0) {
-        int index = rand() % tmp;
-        switch (possibleMoves[index]) {
-            case 1: // Right
-                cellList.getElement((yCord * cols) + xCord).isEmpty = true;
-                xCord++;
-                break;
-            case 2: // Left
-                cellList.getElement((yCord * cols) + xCord).isEmpty = true;
-                xCord--;
-                break;
-            case 3: // Down
-                cellList.getElement((yCord * cols) + xCord).isEmpty = true;
-                yCord++;
-                break;
-            case 4: // Up
-                cellList.getElement((yCord * cols) + xCord).isEmpty = true;
-                yCord--;
-                break;
-        }
-
-        // Check for collision with another organism
-        if (!cellList.getElement((yCord * cols) + xCord).isEmpty) {
-            Position newPos = {xCord, yCord};
-            Organism *otherOrganism = nullptr;
-            for (int i = 0; i < organismList.Size(); ++i) {
-                if (newPos == organismList.getElement(i)->GetPosition()) {
-                    otherOrganism = organismList.getElement(i);
-                    break;
-                }
-            }
-            if (otherOrganism) {
-                Collision(otherOrganism, world);
-            }
-        }
-
-        // Update position and cell state
-        cellList.getElement((yCord * cols) + xCord).isEmpty = false;
-        position.cord.x = xCord;
-        position.cord.y = yCord;
+    int index = rand() % tmp;
+    switch (possibleMoves[index]) {
+        case 1:
+            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            xCord++;
+            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            position.cord.x = xCord;
+            break;
+        case 2:
+            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            xCord--;
+            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            position.cord.x = xCord;
+            break;
+        case 3:
+            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            yCord++;
+            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            position.cord.y = yCord;
+            break;
+        case 4:
+            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            yCord--;
+            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            position.cord.y = yCord;
+            break;
     }
+//        // Check for collision with another organism
+//        if (!cellList.getElement((yCord * cols) + xCord).isEmpty) {
+//            Position newPos = {xCord, yCord};
+//            Organism *otherOrganism = nullptr;
+//            for (int i = 0; i < organismList.Size(); ++i) {
+//                if (newPos == organismList.getElement(i)->GetPosition()) {
+//                    otherOrganism = organismList.getElement(i);
+//                    break;
+//                }
+//            }
+//            if (otherOrganism) {
+//                Collision(otherOrganism, world);
+//            }
+//        }
 }
 
 void Animal::Collision(Organism *other_organism, World &world) {
@@ -69,10 +68,10 @@ void Animal::Collision(Organism *other_organism, World &world) {
     int defenderStr = other_organism->GetStrength();
     if (predatorStr >= defenderStr) {
         cout << "Predator wins!" << endl;
-        world.removeOrganism(other_organism);
+      //  world.removeOrganism(other_organism);
     } else {
         cout << "Defender wins!" << endl;
-        world.removeOrganism(this);
+       // world.removeOrganism(this);
     }
 }
 

@@ -31,8 +31,5 @@ int main() {
     world.makeTurn();
     world.drawWorld();
 
-    world.addOrganism(&p, {1, 1});
-    world.drawWorld();
-
     return 0;
 }
