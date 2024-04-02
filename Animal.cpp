@@ -8,47 +8,47 @@ using namespace std;
 Animal::Animal(int strength, int initiative, int age, const Position &_position, AnimalSpecies name)
         : Organism(strength, initiative, age, _position), name(name) {}
 
-void Animal::Action(Vector<Cell> cellList, int &rows, int &cols) {
+void Animal::Action(Vector<Cell> &cellList, World &world, int &rows, int &columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
     int possibleMoves[4] = {0, 0, 0, 0};
-    int tmp = 0;
-    if (xCord + 1 < cols)
-        possibleMoves[tmp++] = 1;
+    int index = 0;
+    if (xCord + 1 < columns)
+        possibleMoves[index++] = 1;
     if (xCord - 1 >= 0)
-        possibleMoves[tmp++] = 2;
+        possibleMoves[index++] = 2;
     if (yCord + 1 < rows)
-        possibleMoves[tmp++] = 3;
+        possibleMoves[index++] = 3;
     if (yCord - 1 >= 0)
-        possibleMoves[tmp++] = 4;
-    int index = rand() % tmp;
+        possibleMoves[index++] = 4;
+    index = rand() % index;
     switch (possibleMoves[index]) {
         case 1:
-            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = true;
             xCord++;
-            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = false;
             position.cord.x = xCord;
             break;
         case 2:
-            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = true;
             xCord--;
-            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = false;
             position.cord.x = xCord;
             break;
         case 3:
-            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = true;
             yCord++;
-            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = false;
             position.cord.y = yCord;
             break;
         case 4:
-            cellList.getElement((yCord * cols) + xCord).isEmpty = true;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = true;
             yCord--;
-            cellList.getElement((yCord * cols) + xCord).isEmpty = false;
+            cellList.getElement((yCord * columns) + xCord).isEmpty = false;
             position.cord.y = yCord;
             break;
     }
 //        // Check for collision with another organism
-//        if (!cellList.getElement((yCord * cols) + xCord).isEmpty) {
+//        if (!cellList.getElement((yCord * columns) + xCord).isEmpty) {
 //            Position newPos = {xCord, yCord};
 //            Organism *otherOrganism = nullptr;
 //            for (int i = 0; i < organismList.Size(); ++i) {
@@ -68,10 +68,10 @@ void Animal::Collision(Organism *other_organism, World &world) {
     int defenderStr = other_organism->GetStrength();
     if (predatorStr >= defenderStr) {
         cout << "Predator wins!" << endl;
-      //  world.removeOrganism(other_organism);
+        //  world.removeOrganism(other_organism);
     } else {
         cout << "Defender wins!" << endl;
-       // world.removeOrganism(this);
+        // world.removeOrganism(this);
     }
 }
 

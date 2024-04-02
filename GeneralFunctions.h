@@ -8,10 +8,6 @@ void animalStatsInit(); //set basic stats for animals
 
 void plantStatsInit(); //set basic stats for plants
 
-bool cellCheck(Cell &cell); //check if cell is empty
-
-void cellChange(Cell &cell); //change cell "flag"
-
 void ageIncrease(Organism &organism);
 
 void introduction(char& key, int &rows, int &columns);

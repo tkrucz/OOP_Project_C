@@ -31,7 +31,9 @@ public:
 
     void SetPosition(const Position &newPosition);
 
-    virtual void Action(Vector<Cell>cellList, int &rows, int &cols) = 0;
+
+    virtual void Action(Vector<Cell> &cellList, World &world, int &rows, int &columns) = 0;
+    //previous     virtual void Action(Vector<Cell>cellList, int &rows, int &columns) = 0;
 
     virtual void Collision(Organism *otherOrganism, World &world) = 0;
 
