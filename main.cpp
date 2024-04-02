@@ -13,6 +13,12 @@ int main() {
     World world(rows, columns);
 
     Animal w(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
+//    Animal w1(9, 5, 0, {1, 1}, AnimalSpecies::wolf);
+//    Animal s(4, 4, 0, {0, 1}, AnimalSpecies::sheep);
+//    Animal s1(4, 4, 0, {1, 2}, AnimalSpecies::sheep);
+//    Animal f(3, 7, 0, {2,2 }, AnimalSpecies::fox);
+//    Animal f1(3, 7, 0, {2, 3}, AnimalSpecies::fox);
+
     Plant p(0, 0, {1, 0}, PlantSpecies::grass);
 
     world.addOrganism(&w, w.GetPosition());

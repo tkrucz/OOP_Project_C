@@ -20,4 +20,6 @@ void charDictionary();
 
 void worldInit(int &rows, int &columns);
 
+bool operator==(const Position& lhs, const Position& rhs);
+
 #endif //CODE_GENERALFUNCTIONS_H

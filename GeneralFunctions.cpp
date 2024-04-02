@@ -69,3 +69,7 @@ void worldInit(int &rows, int &columns) {
     cin >> columns;
     cout << endl;
 }
+
+bool operator==(const Position& lhs, const Position& rhs) {
+return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
+}

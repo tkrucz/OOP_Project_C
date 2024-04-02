@@ -1,8 +1,8 @@
 #ifndef CODE_ORGANISM_H
 #define CODE_ORGANISM_H
 
-#include "Define.cpp"
 #include "Vector.h"
+#include "Define.cpp"
 
 class World;
 
@@ -31,7 +31,7 @@ public:
 
     void SetPosition(const Position &newPosition);
 
-    virtual void Action(Vector<Cell>cellList, int &rows, int &cols) = 0;
+    virtual void Action(Vector<Cell>cellList, Vector<Organism *> organismList, World &world, int &rows, int &cols) = 0;
 
     virtual void Collision(Organism *otherOrganism, World &world) = 0;
 

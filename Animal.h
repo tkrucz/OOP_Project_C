@@ -4,13 +4,15 @@
 #include "Organism.h"
 #include "Define.cpp"
 
+class World;
+
 class Animal : public Organism {
 private:
     AnimalSpecies name;
 public:
     Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
 
-    void Action(Vector<Cell>cellList, int &rows, int &cols) override;
+    void Action(Vector<Cell>cellList, Vector<Organism *> organismList, World &world, int &rows, int &cols) override;
 
     void Collision(Organism *otherOrganism, World &world) override;
 
