@@ -29,7 +29,7 @@ void World::removeOrganism(Organism *organism) {
 
 void World::makeTurn() {
     for (int i = 0; i < organismList.Size(); ++i) {
-        organismList.getElement(i)->Action(cellList, *this,rows , cols);
+        organismList.getElement(i)->Action(cellList, organismList, *this,rows , cols);
     }
 }
 
