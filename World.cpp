@@ -5,31 +5,29 @@ using namespace std;
 
 World::World(int numRows, int numCols) : rows(numRows), cols(numCols), cellList(numRows * numCols), organismList(0) {}
 
-
 void World::addOrganism(Organism *newOrganism, const Position &position) {
     newOrganism->SetPosition(position);
     organismList.push_back(newOrganism);
     int index = position.cord.y * cols + position.cord.x;
-    cellList.setElement(index, {position, false});
+    cellList[index] = {position, false}; // Direct access using operator[]
 }
 
 void World::removeOrganism(Organism *organism) {
     Position position = organism->GetPosition();
     int index = position.cord.y * cols + position.cord.x;
-    cellList.setElement(index, {position, true});
+    cellList[index] = {position, true}; // Direct access using operator[]
 
-    for (int i = 0; i < organismList.Size(); ++i) {
-        if (organismList.getElement(i) == organism) {
-            organismList.erase(i);
+    for (auto it = organismList.begin(); it != organismList.end(); ++it) {
+        if (*it == organism) {
+            organismList.erase(it);
             break;
         }
     }
 }
 
-
 void World::makeTurn() {
-    for (int i = 0; i < organismList.Size(); ++i) {
-        organismList.getElement(i)->Action(cellList, organismList, *this,rows , cols);
+    for (auto organism : organismList) {
+        organism->Action(cellList, organismList, *this, rows, cols);
     }
 }
 
@@ -38,13 +36,13 @@ void World::drawWorld() const {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             int index = i * cols + j;
-            if (cellList.getElement(index).isEmpty)
+            if (cellList[index].isEmpty)
                 cout << "_";
             else {
-                for (int k = 0; k < organismList.Size(); ++k) {
-                    if (organismList.getElement(k)->GetPosition().cord.x == j &&
-                        organismList.getElement(k)->GetPosition().cord.y == i) {
-                        cout << organismList.getElement(k)->Draw();
+                for (auto organism : organismList) {
+                    if (organism->GetPosition().cord.x == j &&
+                        organism->GetPosition().cord.y == i) {
+                        cout << organism->Draw();
                         break;
                     }
                 }
@@ -52,7 +50,7 @@ void World::drawWorld() const {
         }
         cout << endl;
     }
-    cout << endl; //New line after printing the world
+    cout << endl; // New line after printing the world
 }
 
 World::~World() {
