@@ -9,13 +9,13 @@ void World::addOrganism(Organism *newOrganism, const Position &position) {
     newOrganism->SetPosition(position);
     organismList.push_back(newOrganism);
     int index = position.cord.y * cols + position.cord.x;
-    cellList[index] = {position, false}; // Direct access using operator[]
+    cellList[index] = {position, false};
 }
 
 void World::removeOrganism(Organism *organism) {
     Position position = organism->GetPosition();
     int index = position.cord.y * cols + position.cord.x;
-    cellList[index] = {position, true}; // Direct access using operator[]
+    cellList[index] = {position, true};
 
     for (auto it = organismList.begin(); it != organismList.end(); ++it) {
         if (*it == organism) {

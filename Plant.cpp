@@ -8,7 +8,7 @@ Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
         : Organism(strength, 0, age, position), name(name) {}
 
 void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
-    int probability = rand() % 2; // docelowo %10
+    int probability = rand() % 10;
     int xCord = position.cord.x, yCord = position.cord.y;
     int freeCells[4] = {0, 0, 0, 0};
     Position newPlantPosition;
