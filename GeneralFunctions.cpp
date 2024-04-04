@@ -1,4 +1,5 @@
 #include "GeneralFunctions.h"
+#include "World.h"
 #include "iostream"
 
 using namespace std;
@@ -19,21 +20,13 @@ void plantStatsInit() {
     Plant Sosnowskys_hogweed(10, 0, {0, 0}, PlantSpecies::sosnowskysHogweed);
 }
 
-bool cellCheck(Cell &cell) {
-    if (cell.isEmpty)
-        return true;
-    return false;
-}
-
-void cellChange(Cell &cell) {
-    if (cell.isEmpty)
-        cell.isEmpty = false;
-    cell.isEmpty = true;
-}
-
 void ageIncrease(Organism &organism) {
     int tmp = organism.GetAge();
     organism.SetAge(tmp + 1);
+}
+
+void nameDisplay() {
+    cout << "World Simulator : Tomasz Kruczalak 198049" << endl;
 }
 
 void introduction(char &key, int &rows, int &columns) {
@@ -45,8 +38,7 @@ void introduction(char &key, int &rows, int &columns) {
         if (key == 'm') {
             charDictionary();
             break;
-        }
-        else if( key != '\n')
+        } else if (key != '\n')
             cout << "Wrong key" << endl;
         key = char(getchar());
     }
@@ -70,6 +62,35 @@ void worldInit(int &rows, int &columns) {
     cout << endl;
 }
 
-bool operator==(const Position& lhs, const Position& rhs) {
-return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
+bool operator==(const Position &lhs, const Position &rhs) {
+    return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
+}
+
+void gameLoop(World &world) {
+    char input;
+    bool running = true;
+
+    while (running) {
+        nameDisplay(); // Display any necessary information to the player
+        world.makeTurn(); // Execute a turn in the world
+        world.drawWorld(); // Draw the updated state of the world
+
+        cout << "Press 'q' to quit, 'k' to clear screen and proceed to next turn: ";
+        cin >> input;
+
+        switch (input) {
+            case 'q':
+                running = false;
+                break;
+            case 'k':
+                clearScreen(); // Clear the console screen
+                break;
+            default:
+                cout << "Invalid input. Please try again." << endl;
+        }
+    }
+}
+
+void clearScreen() {
+    system("cls");
 }

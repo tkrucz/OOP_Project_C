@@ -1,5 +1,6 @@
 #include "iostream"
 #include "World.h"
+#include "algorithm"
 
 using namespace std;
 
@@ -26,8 +27,17 @@ void World::removeOrganism(Organism *organism) {
 }
 
 void World::makeTurn() {
-    for (auto organism : organismList) {
+    sort(organismList.begin(), organismList.end(), [](Organism *a, Organism *b) {
+        if (a->GetInitiative() == b->GetInitiative()) {
+            return a->GetAge() < b->GetAge();
+        }
+        return a->GetInitiative() > b->GetInitiative();
+    });
+    for (Organism *organism: organismList) {
         organism->Action(cellList, organismList, *this, rows, cols);
+    }
+    for (Organism *organism: organismList) {
+        ageIncrease(*organism);
     }
 }
 
@@ -39,7 +49,7 @@ void World::drawWorld() const {
             if (cellList[index].isEmpty)
                 cout << "_";
             else {
-                for (auto organism : organismList) {
+                for (auto organism: organismList) {
                     if (organism->GetPosition().cord.x == j &&
                         organism->GetPosition().cord.y == i) {
                         cout << organism->Draw();

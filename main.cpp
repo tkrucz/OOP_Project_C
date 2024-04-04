@@ -26,16 +26,18 @@ int main() {
     world.addOrganism(&f, f.GetPosition());
     world.addOrganism(&h,h.GetPosition());
     world.addOrganism(&p, p.GetPosition());
-    world.drawWorld();
+
+    nameDisplay();
+    world.drawWorld(); //First world visualization
 
     world.makeTurn();
     world.drawWorld();
-
+    world.makeTurn();
+    world.drawWorld();
     world.makeTurn();
     world.drawWorld();
 
-    world.makeTurn();
-    world.drawWorld();
+    //gameLoop(world);
 
     return 0;
 }

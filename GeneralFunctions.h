@@ -11,6 +11,8 @@ void plantStatsInit(); //set basic stats for plants
 
 void ageIncrease(Organism &organism);
 
+void nameDisplay();
+
 void introduction(char& key, int &rows, int &columns);
 
 void charDictionary();
@@ -18,5 +20,9 @@ void charDictionary();
 void worldInit(int &rows, int &columns);
 
 bool operator==(const Position& lhs, const Position& rhs);
+
+void gameLoop(World &world); //main game loop
+
+void clearScreen();
 
 #endif //CODE_GENERALFUNCTIONS_H
