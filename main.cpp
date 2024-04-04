@@ -17,12 +17,14 @@ int main() {
     Animal w(9, 5, 0, {1, 0}, AnimalSpecies::wolf);
     Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
     Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox);
+    Human h({1,1});
 
     Plant p(0, 0, {1, 2}, PlantSpecies::grass);
 
     world.addOrganism(&w, w.GetPosition());
     world.addOrganism(&s, s.GetPosition());
     world.addOrganism(&f, f.GetPosition());
+    world.addOrganism(&h,h.GetPosition());
     world.addOrganism(&p, p.GetPosition());
     world.drawWorld();
 

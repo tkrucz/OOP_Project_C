@@ -15,4 +15,6 @@ add_executable(Code main.cpp
         Plant.cpp
         GeneralFunctions.h
         GeneralFunctions.cpp
+        Human.h
+        Human.cpp
 )

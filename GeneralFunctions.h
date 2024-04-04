@@ -3,6 +3,7 @@
 
 #include "Plant.h"
 #include "Animal.h"
+#include "Human.h"
 
 void animalStatsInit(); //set basic stats for animals
 

@@ -1,12 +1,11 @@
 #include "iostream"
 #include "Animal.h"
-#include "GeneralFunctions.h"
 #include "World.h"
 
 using namespace std;
 
-Animal::Animal(int strength, int initiative, int age, const Position &_position, AnimalSpecies name)
-        : Organism(strength, initiative, age, _position), name(name) {}
+Animal::Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name)
+        : Organism(strength, initiative, age, position), name(name) {}
 
 void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
@@ -24,11 +23,11 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
     index = rand() % index;
     switch (possibleMoves[index]) {
         case 1:
-            if (cellList[(yCord * columns) + xCord + 1].isEmpty) {xCord++;
+            if (cellList[(yCord * columns) + xCord + 1].isEmpty) {
+                xCord++;
                 cellList[(yCord * columns) + xCord].isEmpty = false;
                 position.cord.x = xCord;
-            }
-            else{ //Checking the collision for this cell
+            } else { //Checking the collision for this cell
                 Position newPos = {xCord + 1, yCord};
                 Organism *otherOrganism = nullptr;
                 for (int i = 0; i < organismList.size(); ++i) {
@@ -39,7 +38,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                 }
                 if (otherOrganism) {
                     Collision(otherOrganism, world);
-                    cellList[(yCord  * columns) + xCord + 1].isEmpty = false;
+                    cellList[(yCord * columns) + xCord + 1].isEmpty = false;
                 }
             }
             break;
@@ -48,8 +47,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                 xCord--;
                 cellList[(yCord * columns) + xCord].isEmpty = false;
                 position.cord.x = xCord;
-            }
-            else{ //Checking the collision for this cell
+            } else { //Checking the collision for this cell
                 Position newPos = {xCord - 1, yCord};
                 Organism *otherOrganism = nullptr;
                 for (int i = 0; i < organismList.size(); ++i) {
@@ -60,7 +58,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                 }
                 if (otherOrganism) {
                     Collision(otherOrganism, world);
-                    cellList[(yCord  * columns) + xCord - 1].isEmpty = false;
+                    cellList[(yCord * columns) + xCord - 1].isEmpty = false;
                 }
             }
             break;
@@ -69,9 +67,8 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                 yCord++;
                 cellList[(yCord * columns) + xCord].isEmpty = false;
                 position.cord.y = yCord;
-            }
-            else{ //Checking the collision for this cell
-                Position newPos = {xCord , yCord + 1};
+            } else { //Checking the collision for this cell
+                Position newPos = {xCord, yCord + 1};
                 Organism *otherOrganism = nullptr;
                 for (int i = 0; i < organismList.size(); ++i) {
                     if (newPos == organismList[i]->GetPosition()) {
@@ -90,9 +87,8 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                 yCord--;
                 cellList[(yCord * columns) + xCord].isEmpty = false;
                 position.cord.y = yCord;
-            }
-            else{ //Checking the collision for this cell
-                Position newPos = {xCord , yCord - 1};
+            } else { //Checking the collision for this cell
+                Position newPos = {xCord, yCord - 1};
                 Organism *otherOrganism = nullptr;
                 for (int i = 0; i < organismList.size(); ++i) {
                     if (newPos == organismList[i]->GetPosition()) {
