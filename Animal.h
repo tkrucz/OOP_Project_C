@@ -3,6 +3,7 @@
 
 #include "Organism.h"
 #include "Define.cpp"
+#include "string"
 
 class World;
 
@@ -17,6 +18,8 @@ public:
     void Collision(Organism *otherOrganism, World &world) override;
 
     char Draw() override;
+
+    string nameToString();
 
     ~Animal() ;
 };

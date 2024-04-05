@@ -110,29 +110,46 @@ void Animal::Collision(Organism *other_organism, World &world) {
     int defenderStr = other_organism->GetStrength();
     Position occupiedCell = other_organism->GetPosition();
     if (predatorStr >= defenderStr) {
-        cout << "Predator wins!" << endl;
+        cout << " Predator: " << nameToString() << " wins!" << endl;
         position.cord.x = occupiedCell.cord.x;
         position.cord.y = occupiedCell.cord.y;
         world.removeOrganism(other_organism);
     } else {
-        cout << "Defender wins!" << endl;
+        cout << " Defender wins!" << endl;
         world.removeOrganism(this);
     }
 }
 
 char Animal::Draw() {
-    if (name == wolf)
-        return 'W';
-    else if (name == sheep)
-        return 'S';
-    else if (name == fox)
-        return 'F';
-    else if (name == turtle)
-        return 'T';
-    else if (name == antelope)
-        return 'A';
-    else
-        return 'H';
+    switch (name) {
+        case wolf:
+            return 'W';
+        case sheep:
+            return 'S';
+        case fox:
+            return 'F';
+        case turtle:
+            return 'T';
+        case antelope:
+            return 'A';
+        default:
+            return 'H';
+    }
+}
+
+string Animal::nameToString() {
+    switch (name) {
+        case wolf:
+            return "wolf";
+        case sheep:
+            return "sheep";
+        case fox:
+            return "fox";
+        case human:
+            return "human";
+        default:
+            return "Unknown";
+    }
 }
 
 Animal::~Animal() {

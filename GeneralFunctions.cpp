@@ -5,11 +5,17 @@
 using namespace std;
 
 void animalStatsInit() {
-    Animal wolf(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
-    Animal sheep(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
-    Animal fox(3, 7, 0, {0, 0}, AnimalSpecies::fox);
-    Animal turtle(2, 1, 0, {0, 0}, AnimalSpecies::turtle);
-    Animal antelope(4, 4, 0, {0, 0}, AnimalSpecies::antelope);
+    Animal wolf1(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
+    Animal wolf2(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
+    Animal sheep1(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
+    Animal sheep2(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
+    Animal fox1(3, 7, 0, {0, 0}, AnimalSpecies::fox);
+    Animal fox2(3, 7, 0, {0, 0}, AnimalSpecies::fox);
+    Animal turtle1(2, 1, 0, {0, 0}, AnimalSpecies::turtle);
+    Animal turtle2(2, 1, 0, {0, 0}, AnimalSpecies::turtle);
+    Animal antelope1(4, 4, 0, {0, 0}, AnimalSpecies::antelope);
+    Animal antelope2(4, 4, 0, {0, 0}, AnimalSpecies::antelope);
+
 };
 
 void plantStatsInit() {
