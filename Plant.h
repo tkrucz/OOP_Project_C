@@ -14,7 +14,7 @@ public:
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 
-    void Collision(Organism *otherOrganism, World &world) override;
+    void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) override;
 
     char Draw() override;
 

@@ -33,10 +33,11 @@ public:
 
     void SetPosition(const Position &newPosition);
 
-    virtual void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) = 0;
-    //previous     virtual void Action(Vector<Cell>cellList, int &rows, int &columns) = 0;
+    static Organism* findOrganismAtPosition(const Position& position, const std::vector<Organism*>& organismList, const std::vector<Cell>& cellList, int columns);
 
-    virtual void Collision(Organism *otherOrganism, World &world) = 0;
+    virtual void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) = 0;
+
+    virtual void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) = 0;
 
     virtual char Draw()  = 0;
 

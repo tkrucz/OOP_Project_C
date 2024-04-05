@@ -48,7 +48,7 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
     }
 }
 
-void Plant::Collision(Organism *other_organism, World &world) {
+void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) {
     // Implement collision behavior for plants
     // For example, interaction with other organisms
 }
