@@ -10,62 +10,65 @@ Animal::Animal(int strength, int initiative, int age, const Position &position, 
 void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
     int possibleMoves[4] = {0, 0, 0, 0};
-    int index = 0;
-    if (xCord + 1 < columns)
-        possibleMoves[index++] = 1;
-    if (xCord - 1 >= 0)
-        possibleMoves[index++] = 2;
-    if (yCord + 1 < rows)
-        possibleMoves[index++] = 3;
-    if (yCord - 1 >= 0)
-        possibleMoves[index++] = 4;
-    cellList[(yCord * columns) + xCord].isEmpty = true;
-    index = rand() % index;
-    switch (possibleMoves[index]) {
-        case 1:
-            if (cellList[(yCord * columns) + xCord + 1].isEmpty ||
-                (name == fox && !isStronger(cellList, organismList, strength, columns))) {
-                moveAnimal(cellList, xCord, yCord, xCord + 1, yCord, columns);
-                return;
-            } else { //Checking the collision for this cell
-                Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList, columns);
-                if (otherOrganism)
-                    Collision(cellList, otherOrganism, world, columns);
-            }
-            break;
-        case 2:
-            if (cellList[(yCord * columns) + xCord - 1].isEmpty ||
-                (name == fox && !isStronger(cellList, organismList, strength, columns))) {
-                moveAnimal(cellList, xCord, yCord, xCord - 1, yCord, columns);
-                return;
-            } else { //Checking the collision for this cell
-                Organism *otherOrganism = findOrganismAtPosition({xCord + -1, yCord}, organismList, cellList, columns);
-                if (otherOrganism)
-                    Collision(cellList, otherOrganism, world, columns);
-            }
-            break;
-        case 3:
-            if (cellList[((yCord + 1) * columns) + xCord].isEmpty ||
-                (name == fox && !isStronger(cellList, organismList, strength, columns))) {
-                moveAnimal(cellList, xCord, yCord, xCord, yCord + 1, columns);
-                return;
-            } else { //Checking the collision for this cell
-                Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList, columns);
-                if (otherOrganism)
-                    Collision(cellList, otherOrganism, world, columns);
-            }
-            break;
-        case 4:
-            if (cellList[((yCord - 1) * columns) + xCord].isEmpty ||
-                (name == fox && !isStronger(cellList, organismList, strength, columns))) {
-                moveAnimal(cellList, xCord, yCord, xCord, yCord - 1, columns);
-                return;
-            } else { //Checking the collision for this cell
-                Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList, columns);
-                if (otherOrganism)
-                    Collision(cellList, otherOrganism, world, columns);
-            }
-            break;
+    int index = 0, numActions = 1;
+    if (name == antelope)
+        numActions = 2; // Antelope performs action
+    for (int i = 0; i < numActions; i++) {
+        if (xCord + 1 < columns)
+            possibleMoves[index++] = 1;
+        if (xCord - 1 >= 0)
+            possibleMoves[index++] = 2;
+        if (yCord + 1 < rows)
+            possibleMoves[index++] = 3;
+        if (yCord - 1 >= 0)
+            possibleMoves[index++] = 4;
+        index = rand() % index;
+        switch (possibleMoves[index]) {
+            case 1:
+                if (cellList[(yCord * columns) + xCord + 1].isEmpty ||
+                    (name == fox && !isStronger(cellList, organismList, strength, columns))) {
+                    moveAnimal(cellList, xCord, yCord, xCord + 1, yCord, columns);
+                } else { //Checking the collision for this cell
+                    Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList,
+                                                                     columns);
+                    if (otherOrganism)
+                        Collision(cellList, otherOrganism, world, columns);
+                }
+                break;
+            case 2:
+                if (cellList[(yCord * columns) + xCord - 1].isEmpty ||
+                    (name == fox && !isStronger(cellList, organismList, strength, columns))) {
+                    moveAnimal(cellList, xCord, yCord, xCord - 1, yCord, columns);
+                } else { //Checking the collision for this cell
+                    Organism *otherOrganism = findOrganismAtPosition({xCord + -1, yCord}, organismList, cellList,
+                                                                     columns);
+                    if (otherOrganism)
+                        Collision(cellList, otherOrganism, world, columns);
+                }
+                break;
+            case 3:
+                if (cellList[((yCord + 1) * columns) + xCord].isEmpty ||
+                    (name == fox && !isStronger(cellList, organismList, strength, columns))) {
+                    moveAnimal(cellList, xCord, yCord, xCord, yCord + 1, columns);
+                } else { //Checking the collision for this cell
+                    Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList,
+                                                                     columns);
+                    if (otherOrganism)
+                        Collision(cellList, otherOrganism, world, columns);
+                }
+                break;
+            case 4:
+                if (cellList[((yCord - 1) * columns) + xCord].isEmpty ||
+                    (name == fox && !isStronger(cellList, organismList, strength, columns))) {
+                    moveAnimal(cellList, xCord, yCord, xCord, yCord - 1, columns);
+                } else { //Checking the collision for this cell
+                    Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList,
+                                                                     columns);
+                    if (otherOrganism)
+                        Collision(cellList, otherOrganism, world, columns);
+                }
+                break;
+        }
     }
 }
 
@@ -76,11 +79,12 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
     Position occupiedCell = otherOrganism->GetPosition();
     if (predatorStr >= defenderStr) {
         cout << " Predator: " << nameToString() << " wins!" << endl;
-        moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
         world.removeOrganism(otherOrganism);
+        moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
     } else {
         cout << " Defender wins!" << endl;
-        cellList[(yCord * columns) + xCord].isEmpty = true; //update that attacker dies so cell on which he stands is empty
+        cellList[(yCord * columns) +
+                 xCord].isEmpty = true; //update that attacker dies so cell on which he stands is empty
     }
 }
 
@@ -109,10 +113,12 @@ string Animal::nameToString() {
             return "sheep";
         case fox:
             return "fox";
-        case human:
-            return "human";
+        case turtle:
+            return "turtle";
+        case antelope:
+            return "antelope";
         default:
-            return "Unknown";
+            return "human";
     }
 }
 
