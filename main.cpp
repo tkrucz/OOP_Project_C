@@ -18,6 +18,7 @@ int main() {
     Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
     Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox);
     Animal a(4, 4, 0, {3, 3}, AnimalSpecies::antelope);
+    Animal t(2, 1, 0, {3, 0}, AnimalSpecies::turtle);
     Human h({1,1});
 
     Plant p(0, 0, {1, 2}, PlantSpecies::grass);
@@ -27,6 +28,7 @@ int main() {
     world.addOrganism(&f, f.GetPosition());
     world.addOrganism(&h,h.GetPosition());
     world.addOrganism(&a,a.GetPosition());
+    world.addOrganism(&t,t.GetPosition());
     world.addOrganism(&p, p.GetPosition());
 
     nameDisplay();

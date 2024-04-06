@@ -13,6 +13,11 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
     int index = 0, numActions = 1;
     if (name == antelope)
         numActions = 2; // Antelope performs action
+    if (name == turtle) {
+        int probability = rand() % 100;
+        if (probability < 75)
+            return;
+    }
     for (int i = 0; i < numActions; i++) {
         if (xCord + 1 < columns)
             possibleMoves[index++] = 1;
@@ -74,8 +79,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
 
 void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
-    int predatorStr = strength;
-    int defenderStr = otherOrganism->GetStrength();
+    int predatorStr = strength, defenderStr = otherOrganism->GetStrength();
     Position occupiedCell = otherOrganism->GetPosition();
     if (predatorStr >= defenderStr) {
         cout << " Predator: " << nameToString() << " wins!" << endl;
@@ -83,8 +87,8 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
         moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
     } else {
         cout << " Defender wins!" << endl;
-        cellList[(yCord * columns) +
-                 xCord].isEmpty = true; //update that attacker dies so cell on which he stands is empty
+        cellList[(yCord * columns) + xCord].isEmpty = true;
+        //update that attacker dies so cell on which he stands is empty
     }
 }
 
@@ -138,6 +142,10 @@ bool Animal::isStronger(vector<Cell> &cellList, vector<Organism *> &organismList
         return true;
     }
     return false;
+}
+
+AnimalSpecies Animal::GetAnimalName() const {
+    return name;
 }
 
 Animal::~Animal() {

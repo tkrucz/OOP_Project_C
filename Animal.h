@@ -25,6 +25,8 @@ public:
 
     bool isStronger(vector<Cell> &cellList, vector<Organism*> &organismList, int strength, int columns);
 
+    AnimalSpecies GetAnimalName() const;
+
     ~Animal() ;
 };
 
