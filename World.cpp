@@ -18,9 +18,9 @@ void World::removeOrganism(Organism *organism) {
     int index = position.cord.y * cols + position.cord.x;
     cellList[index] = {position, true};
 
-    for (auto it = organismList.begin(); it != organismList.end(); ++it) {
-        if (*it == organism) {
-            organismList.erase(it);
+    for (auto i = organismList.begin(); i != organismList.end(); ++i) {
+        if (*i == organism) {
+            organismList.erase(i);
             break;
         }
     }

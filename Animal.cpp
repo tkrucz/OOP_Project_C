@@ -14,7 +14,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
     if (name == turtle) {
         int probability = rand() % 100;
         if (probability < 75)
-            return;
+            return; //Turtle doesn't move
     }
     for (int i = 0; i < numActions; i++) {
         int xCord = position.cord.x, yCord = position.cord.y;

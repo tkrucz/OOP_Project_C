@@ -18,6 +18,10 @@ public:
 
     char Draw() override;
 
+    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns);
+
+    PlantSpecies GetPlantName() const;
+
     ~Plant() ;
 };
 

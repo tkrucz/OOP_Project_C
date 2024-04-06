@@ -35,6 +35,8 @@ public:
 
     static Organism* findOrganismAtPosition(const Position& position, const std::vector<Organism*>& organismList, const std::vector<Cell>& cellList, int columns);
 
+    PlantSpecies GetPlantName() const;
+
     AnimalSpecies GetAnimalName() const;
 
     virtual void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) = 0;

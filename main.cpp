@@ -17,9 +17,10 @@ int main() {
     Animal w(9, 5, 0, {1, 0}, AnimalSpecies::wolf);
     Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
     Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox);
-    Animal a(4, 4, 0, {3, 3}, AnimalSpecies::antelope);
+    Animal a(4, 4, 0, {0, 4}, AnimalSpecies::antelope);
     Animal t(2, 1, 0, {3, 0}, AnimalSpecies::turtle);
-    Human h({1,1});
+
+    Human h({3,3});
 
     Plant p(0, 0, {1, 2}, PlantSpecies::grass);
     Plant sH(10, 0, {4, 4}, PlantSpecies::sosnowskysHogweed);
@@ -32,8 +33,6 @@ int main() {
     world.addOrganism(&t,t.GetPosition());
     world.addOrganism(&p, p.GetPosition());
     world.addOrganism(&sH, sH.GetPosition());
-
-
 
     nameDisplay();
     world.drawWorld(); //First world visualization
