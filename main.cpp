@@ -22,6 +22,7 @@ int main() {
     Human h({1,1});
 
     Plant p(0, 0, {1, 2}, PlantSpecies::grass);
+    Plant sH(10, 0, {4, 4}, PlantSpecies::sosnowskysHogweed);
 
     world.addOrganism(&w, w.GetPosition());
     world.addOrganism(&s, s.GetPosition());
@@ -30,6 +31,9 @@ int main() {
     world.addOrganism(&a,a.GetPosition());
     world.addOrganism(&t,t.GetPosition());
     world.addOrganism(&p, p.GetPosition());
+    world.addOrganism(&sH, sH.GetPosition());
+
+
 
     nameDisplay();
     world.drawWorld(); //First world visualization
