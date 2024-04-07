@@ -16,10 +16,6 @@ int Organism::GetInitiative() const {
     return initiative;
 }
 
-void Organism::SetInitiative(int newInitiative) {
-    initiative = newInitiative;
-}
-
 int Organism::GetAge() const {
     return age;
 }
@@ -40,10 +36,15 @@ Organism *Organism::findOrganismAtPosition(const Position &position, const std::
                                            const std::vector<Cell> &cellList, int columns) {
     int xCord = position.cord.x;
     int yCord = position.cord.y;
-    Position newCell = cellList[(yCord * columns) + xCord].cellCord;
-    for (int i = 0; i < organismList.size(); ++i) {
-        if (newCell == organismList[i]->GetPosition()) {
-            return organismList[i];
+    const Cell &cell = cellList[(yCord * columns) + xCord];
+
+    if (cell.isEmpty) {
+        return nullptr;
+    }
+
+    for (Organism *organism : organismList) {
+        if (organism->GetPosition() == cell.cellCord) {
+            return organism;
         }
     }
     return nullptr;

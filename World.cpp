@@ -14,10 +14,6 @@ void World::addOrganism(Organism *newOrganism, const Position &position) {
 }
 
 void World::removeOrganism(Organism *organism) {
-    Position position = organism->GetPosition();
-    int index = position.cord.y * cols + position.cord.x;
-    cellList[index] = {position, true};
-
     for (auto i = organismList.begin(); i != organismList.end(); ++i) {
         if (*i == organism) {
             organismList.erase(i);

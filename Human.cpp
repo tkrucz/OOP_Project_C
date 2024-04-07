@@ -24,10 +24,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
         switch (key) {
             case 'w':
                 if (yCord > 0 && cellList[(yCord - 1) * columns + xCord].isEmpty) {
-                    cellList[yCord * columns + xCord].isEmpty = true;
-                    yCord--;
-                    cellList[yCord * columns + xCord].isEmpty = false;
-                    position.cord.y = yCord;
+                    moveAnimal(cellList,xCord,yCord,xCord,yCord - 1,columns);
                 } else {
                     Position newPos = {xCord, yCord - 1};
                     for (Organism *otherOrganism: organismList) {
@@ -40,10 +37,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 break;
             case 'a':
                 if (xCord > 0 && cellList[yCord * columns + (xCord - 1)].isEmpty) {
-                    cellList[yCord * columns + xCord].isEmpty = true;
-                    xCord--;
-                    cellList[yCord * columns + xCord].isEmpty = false;
-                    position.cord.x = xCord;
+                    moveAnimal(cellList,xCord,yCord,xCord - 1,yCord ,columns);
                 } else {
                     Position newPos = {xCord - 1, yCord};
                     for (Organism *otherOrganism: organismList) {
@@ -56,10 +50,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 break;
             case 's': // Move down
                 if (yCord < rows - 1 && cellList[(yCord + 1) * columns + xCord].isEmpty) {
-                    cellList[yCord * columns + xCord].isEmpty = true;
-                    yCord++;
-                    cellList[yCord * columns + xCord].isEmpty = false;
-                    position.cord.y = yCord;
+                    moveAnimal(cellList,xCord,yCord,xCord,yCord + 1,columns);
                 } else {
                     Position newPos = {xCord, yCord + 1};
                     for (Organism *otherOrganism: organismList) {
@@ -72,10 +63,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 break;
             case 'd': // Move right
                 if (xCord < columns - 1 && cellList[yCord * columns + (xCord + 1)].isEmpty) {
-                    cellList[yCord * columns + xCord].isEmpty = true;
-                    xCord++;
-                    cellList[yCord * columns + xCord].isEmpty = false;
-                    position.cord.x = xCord;
+                    moveAnimal(cellList,xCord,yCord,xCord + 1,yCord ,columns);
                 } else {
                     Position newPos = {xCord + 1, yCord};
                     for (Organism *otherOrganism: organismList) {

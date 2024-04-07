@@ -3,8 +3,6 @@
 
 #include "Organism.h"
 #include "Define.cpp"
-#include "string"
-
 class World;
 
 class Animal : public Organism {
@@ -19,13 +17,11 @@ public:
 
     char Draw() override;
 
-    string nameToString();
+    string nameToString() override;
 
     void moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns);
 
     bool isStronger(vector<Cell> &cellList, vector<Organism*> &organismList, int newX, int newY, int strength, int columns);
-
-    AnimalSpecies GetAnimalName() const;
 
     ~Animal() ;
 };

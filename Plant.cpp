@@ -9,9 +9,9 @@ Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
 
 void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
-    if(name ==sosnowskysHogweed) {
-       //sosnowskysAction(cellList, organismList, world, rows, columns); !!!Correct
-       return; //Do only special action for this kind of plant
+    if (name == sosnowskysHogweed) {
+        //sosnowskysAction(cellList, organismList, world, rows, columns); <-- Has to be changed
+        return; //This species of plant does only his special action
     }
     if (name == sowThistle)
         numActions = 3;
@@ -75,53 +75,53 @@ char Plant::Draw() {
         return '#';
 }
 
-//Kills every animal in its immediate neighborhood
-void Plant::sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) {
-    int xCord = position.cord.x, yCord = position.cord.y;
-    int freeCells[4] = {0, 0, 0, 0};
-    int index = 0;
-    if (xCord + 1 < columns && !cellList[(yCord * columns) + xCord + 1].isEmpty)
-        freeCells[index++] = 1;
-    if (xCord - 1 >= 0 && !cellList[(yCord * columns) + xCord - 1].isEmpty)
-        freeCells[index++] = 2;
-    if (yCord + 1 < rows && !cellList[((yCord + 1) * columns) + xCord].isEmpty)
-        freeCells[index++] = 3;
-    if (yCord - 1 >= 0 && !cellList[((yCord - 1) * columns) + xCord].isEmpty)
-        freeCells[index++] = 4;
-    if(index != 0) {
-        for (int i = 0; i < index; i++) {
-            switch (freeCells[i]) {
-                case 1: {
-                    Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList, columns);
-                    world.removeOrganism(otherOrganism);
-                    cellList[(yCord * columns) + xCord + 1].isEmpty = true;
-                    break;
-                }
-                case 2: {
-                    Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList, columns);
-                    world.removeOrganism(otherOrganism);
-                    cellList[(yCord * columns) + xCord - 1].isEmpty = true;
-                    break;
-                }
-                case 3: {
-                    Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList, columns);
-                    world.removeOrganism(otherOrganism);
-                    cellList[((yCord + 1) * columns) + xCord].isEmpty = true;
-                    break;
-                }
-                case 4: {
-                    Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList, columns);
-                    world.removeOrganism(otherOrganism);
-                    cellList[((yCord - 1) * columns) + xCord].isEmpty = true;
-                    break;
-                }
-            }
-        }
+string Plant::nameToString() {
+    switch (name) {
+        case guarana:
+            return "guarana";
+        case sowThistle:
+            return "sow thistle";
+        case belladonna:
+            return "belladonna";
+        case sosnowskysHogweed:
+            return "sosnowskys hogweed";
+        default:
+            return "grass";
     }
 }
 
-PlantSpecies Plant::GetPlantName() const {
-    return name;
+//Kills every animal in its immediate neighborhood
+void Plant::sosnowskysAction(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows,
+                             int &columns) {
+    int xCord = position.cord.x, yCord = position.cord.y;
+    if (yCord > 0 && !cellList[((yCord - 1) * columns) + xCord].isEmpty) {
+        Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList, columns);
+        if (otherOrganism) {
+            world.removeOrganism(otherOrganism);
+            cellList[((yCord - 1) * columns) + xCord].isEmpty = true;
+        }
+    }
+    if (yCord < rows - 1 && !cellList[((yCord + 1) * columns) + xCord].isEmpty) {
+        Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList, columns);
+        if (otherOrganism) {
+            world.removeOrganism(otherOrganism);
+            cellList[((yCord + 1) * columns) + xCord].isEmpty = true;
+        }
+    }
+    if (xCord > 0 && !cellList[(yCord * columns) + (xCord - 1)].isEmpty) {
+        Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList, columns);
+        if (otherOrganism) {
+            world.removeOrganism(otherOrganism);
+            cellList[(yCord * columns) + (xCord - 1)].isEmpty = true;
+        }
+    }
+    if (xCord < columns - 1 && !cellList[(yCord * columns) + (xCord + 1)].isEmpty) {
+        Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList, columns);
+        if (otherOrganism) {
+            world.removeOrganism(otherOrganism);
+            cellList[(yCord * columns) + (xCord + 1)].isEmpty = true;
+        }
+    }
 }
 
 Plant::~Plant() {

@@ -147,10 +147,6 @@ bool Animal::isStronger(vector<Cell> &cellList, vector<Organism *> &organismList
     return false;
 }
 
-AnimalSpecies Animal::GetAnimalName() const {
-    return name;
-}
-
 Animal::~Animal() {
     cout << "Animal was killed" << endl;
 }

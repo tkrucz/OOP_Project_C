@@ -18,9 +18,9 @@ public:
 
     char Draw() override;
 
-    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns);
+    string nameToString() override;
 
-    PlantSpecies GetPlantName() const;
+    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns);
 
     ~Plant() ;
 };

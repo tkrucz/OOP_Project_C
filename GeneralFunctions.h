@@ -23,6 +23,6 @@ bool operator==(const Position& lhs, const Position& rhs);
 
 void gameLoop(World &world); //main game loop
 
-void clearScreen();
+void clearScreen(); //<-- Has to be changed
 
 #endif //CODE_GENERALFUNCTIONS_H
