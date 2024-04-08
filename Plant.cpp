@@ -10,7 +10,7 @@ Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
 void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
     if (name == sosnowskysHogweed) {
-        //sosnowskysAction(cellList, organismList, world, rows, columns); <-- Has to be changed
+        sosnowskysAction(cellList, organismList, world, rows, columns); //still something is wrong
         return; //This species of plant does only his special action
     }
     if (name == sowThistle)
@@ -57,16 +57,16 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
     }
 }
 
-void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) {
+void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) {
     if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
         // Handle collision based on the type of plant
         if (name == guarana) {
             // Guarana: Increase the strength of the animal by 3
             animal->SetStrength(animal->GetStrength() + 3);
-            cout << animal->nameToString() << " ate Guarana and gained strength!" << endl;
+            cout << "Predator " << animal->nameToString() << " ate guarana and gained 3 strength!" << endl;
         } else if (name == belladonna || name == sosnowskysHogweed) {
             // Belladonna or Sosnowsky's hogweed: Kills the animal
-            cout << animal->nameToString() << " ate " << nameToString() << " and died!" << endl;
+            cout << "Predator " << animal->nameToString() << " ate " << nameToString() << " and died!" << endl;
             world.removeOrganism(animal);
             // Remove animal from its current position
             cellList[(animal->GetPosition().cord.y * columns) + animal->GetPosition().cord.x].isEmpty = true;
@@ -102,7 +102,7 @@ string Plant::nameToString() {
         case belladonna:
             return "belladonna";
         case sosnowskysHogweed:
-            return "sosnowskys hogweed";
+            return "sosnowsky's hogweed";
         default:
             return "grass";
     }
@@ -112,28 +112,28 @@ string Plant::nameToString() {
 void Plant::sosnowskysAction(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows,
                              int &columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
-    if (yCord > 0 && !cellList[((yCord - 1) * columns) + xCord].isEmpty) {
+    if (yCord - 1 >= 0 && !cellList[((yCord - 1) * columns) + xCord].isEmpty) {
         Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList, columns);
         if (otherOrganism) {
             world.removeOrganism(otherOrganism);
             cellList[((yCord - 1) * columns) + xCord].isEmpty = true;
         }
     }
-    if (yCord < rows - 1 && !cellList[((yCord + 1) * columns) + xCord].isEmpty) {
+    if (yCord + 1 < rows && !cellList[((yCord + 1) * columns) + xCord].isEmpty) {
         Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList, columns);
         if (otherOrganism) {
             world.removeOrganism(otherOrganism);
             cellList[((yCord + 1) * columns) + xCord].isEmpty = true;
         }
     }
-    if (xCord > 0 && !cellList[(yCord * columns) + (xCord - 1)].isEmpty) {
+    if (xCord - 1 >= 0 && !cellList[(yCord * columns) + (xCord - 1)].isEmpty) {
         Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList, columns);
         if (otherOrganism) {
             world.removeOrganism(otherOrganism);
             cellList[(yCord * columns) + (xCord - 1)].isEmpty = true;
         }
     }
-    if (xCord < columns - 1 && !cellList[(yCord * columns) + (xCord + 1)].isEmpty) {
+    if (xCord + 1 < columns && !cellList[(yCord * columns) + (xCord + 1)].isEmpty) {
         Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList, columns);
         if (otherOrganism) {
             world.removeOrganism(otherOrganism);

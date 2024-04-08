@@ -23,6 +23,7 @@ int main() {
     Human h({3,3});
 
     Plant p(0, 0, {1, 2}, PlantSpecies::grass);
+    Plant sT(0, 0, {1, 5}, PlantSpecies::sowThistle);
     Plant g(0, 0, {3, 2}, PlantSpecies::guarana);
     Plant b(99, 0, {4, 0}, PlantSpecies::belladonna);
     Plant sH(10, 0, {4, 4}, PlantSpecies::sosnowskysHogweed);
@@ -30,10 +31,12 @@ int main() {
     world.addOrganism(&w, w.GetPosition());
     world.addOrganism(&s, s.GetPosition());
     world.addOrganism(&f, f.GetPosition());
-    world.addOrganism(&h,h.GetPosition());
     world.addOrganism(&a,a.GetPosition());
     world.addOrganism(&t,t.GetPosition());
+    world.addOrganism(&h,h.GetPosition());
+
     world.addOrganism(&p, p.GetPosition());
+    world.addOrganism(&sT, sT.GetPosition());
     world.addOrganism(&g, g.GetPosition());
     world.addOrganism(&b, b.GetPosition());
     world.addOrganism(&sH, sH.GetPosition());

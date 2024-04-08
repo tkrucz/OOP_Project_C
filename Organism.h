@@ -35,7 +35,7 @@ public:
 
     virtual void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) = 0;
 
-    virtual void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) = 0;
+    virtual void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) = 0;
 
     virtual char Draw()  = 0;
 

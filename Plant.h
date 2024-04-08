@@ -14,7 +14,7 @@ public:
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 
-    void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &columns) override;
+    void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) override;
 
     char Draw() override;
 
@@ -22,7 +22,7 @@ public:
 
     AnimalSpecies GetName() override;
 
-    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns);
+    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns); //INCORRECT
 
     ~Plant() ;
 };

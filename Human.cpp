@@ -29,7 +29,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                     Position newPos = {xCord, yCord - 1};
                     for (Organism *otherOrganism: organismList) {
                         if (otherOrganism->GetPosition() == newPos) {
-                            Collision(cellList, otherOrganism, world, columns);
+                            Collision(cellList, otherOrganism, world, rows, columns);
                             break;
                         }
                     }
@@ -42,7 +42,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                     Position newPos = {xCord - 1, yCord};
                     for (Organism *otherOrganism: organismList) {
                         if (otherOrganism->GetPosition() == newPos) {
-                            Collision(cellList, otherOrganism, world, columns);
+                            Collision(cellList, otherOrganism, world, rows, columns);
                             break;
                         }
                     }
@@ -55,7 +55,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                     Position newPos = {xCord, yCord + 1};
                     for (Organism *otherOrganism: organismList) {
                         if (otherOrganism->GetPosition() == newPos) {
-                            Collision(cellList, otherOrganism, world, columns);
+                            Collision(cellList, otherOrganism, world, rows, columns);
                             break;
                         }
                     }
@@ -68,7 +68,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                     Position newPos = {xCord + 1, yCord};
                     for (Organism *otherOrganism: organismList) {
                         if (otherOrganism->GetPosition() == newPos) {
-                            Collision(cellList, otherOrganism, world, columns);
+                            Collision(cellList, otherOrganism, world, rows, columns);
                             break;
                         }
                     }
