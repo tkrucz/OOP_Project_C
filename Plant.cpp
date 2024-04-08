@@ -79,16 +79,18 @@ void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &wo
 }
 
 char Plant::Draw() {
-    if (name == guarana)
-        return '+';
-    else if (name == sowThistle)
-        return '*';
-    else if (name == belladonna)
-        return '?';
-    else if (name == sosnowskysHogweed)
-        return '!';
-    else
-        return '#';
+    switch (name) {
+        case guarana:
+            return '+';
+        case sowThistle:
+            return '*';
+        case belladonna:
+            return '?';
+        case sosnowskysHogweed:
+            return '!';
+        default:
+            return '#';
+    }
 }
 
 string Plant::nameToString() {

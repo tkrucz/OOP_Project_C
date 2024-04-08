@@ -147,14 +147,14 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
 
         if (predatorStr >= defenderStr) {
             // Predator wins the fight
-            cout << "Predator " << nameToString() << " attacks and defeats ";
+            cout << "Predator " << nameToString() << " attacked and defeated ";
             cout << otherAnimal->nameToString() << endl;
             world.removeOrganism(otherOrganism);
             // Move to the defender's position
             moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x,occupiedCell.cord.y,columns);
         } else {
             // Defender wins the fight
-            cout << "Defender " << otherAnimal->nameToString() << " defeats ";
+            cout << "Defender " << otherAnimal->nameToString() << " defeated ";
             cout << nameToString() << endl;
             world.removeOrganism(this);
             // Remove predator from the current position
@@ -163,8 +163,12 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
     }
     // If the other organism is a plant, animal eats the plant
     else if (auto *otherPlant = dynamic_cast<Plant *>(otherOrganism)) {
-        cout << "Predator " << nameToString() << " eats ";
+        cout << "Predator " << nameToString() << " ate ";
         cout << otherPlant->nameToString() << endl;
+        if(otherPlant->nameToString() == "guarana" ||
+        otherPlant->nameToString() == "belladonna" ||
+        otherPlant->nameToString() == "sosnowskys hogweed")
+        otherPlant->Collision(cellList,this,world,columns);
         world.removeOrganism(otherOrganism);
         // Move to the plant's position
         moveAnimal(cellList, xCord,yCord, occupiedCell.cord.x,occupiedCell.cord.y, columns);
