@@ -20,6 +20,8 @@ public:
 
     string nameToString() override;
 
+    AnimalSpecies GetName() override;
+
     void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns);
 
     ~Plant() ;

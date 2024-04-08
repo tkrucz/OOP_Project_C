@@ -15,7 +15,8 @@ enum AnimalSpecies{
     fox,
     turtle,
     antelope,
-    human
+    human,
+    notAnimal
 };
 
 enum PlantSpecies{

@@ -41,6 +41,8 @@ public:
 
     virtual string nameToString() = 0;
 
+    virtual AnimalSpecies GetName() = 0;
+
     ~Organism();
 };
 
