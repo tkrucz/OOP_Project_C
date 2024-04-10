@@ -8,8 +8,9 @@ class World;
 class Animal : public Organism {
 private:
     AnimalSpecies name;
+    bool isBaby;
 public:
-    Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name);
+    Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name, bool isBaby);
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 
@@ -20,6 +21,10 @@ public:
     string nameToString() override;
 
     AnimalSpecies GetName() override;
+
+    bool GetIsBaby();
+
+    void SetIsNoBaby();
 
     void moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns);
 

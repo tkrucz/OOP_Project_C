@@ -32,6 +32,9 @@ void World::makeTurn() {
     for (Organism *organism: organismList) {
         organism->Action(cellList, organismList, *this, rows, cols);
     }
+    for(Organism *organism: organismList) {
+        changeIsBaby(*organism);
+    }
     for (Organism *organism: organismList) {
         ageIncrease(*organism);
     }

@@ -5,10 +5,10 @@
 using namespace std;
 
 Human::Human(const Position &position)
-        : Animal(5, 4, 0, position, human) {}
+        : Animal(5, 4, 0, position, human, false),
+          abilityIsActive(false), abilityDuration(0), abilityCooldown(0) {}
 
 void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
-
     bool isHumanPresent = false;
     for (Organism *organism: organismList) {
         if (dynamic_cast<Human *>(organism)) {
@@ -19,12 +19,18 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
     if (isHumanPresent) {
         int xCord = position.cord.x, yCord = position.cord.y;
         char key;
-        cout << "Enter a key to move: W (up), A (left),S (down),D (right) : ";
+        bool actionDone = false;
+        if (abilityIsActive)
+            cout << "Enter a key to move: W (up), A (left),S (down),D (right) : ";
+        else {
+            cout << "Enter a key to move or to activate a special ability : " << endl;
+            cout << "W (up), A (left),S (down),D (right), H(special ability) : ";
+        }
         cin >> key;
         switch (key) {
             case 'w':
                 if (yCord > 0 && cellList[(yCord - 1) * columns + xCord].isEmpty) {
-                    moveAnimal(cellList,xCord,yCord,xCord,yCord - 1,columns);
+                    moveAnimal(cellList, xCord, yCord, xCord, yCord - 1, columns);
                 } else {
                     Position newPos = {xCord, yCord - 1};
                     for (Organism *otherOrganism: organismList) {
@@ -34,10 +40,11 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                         }
                     }
                 }
+                actionDone = true;
                 break;
             case 'a':
                 if (xCord > 0 && cellList[yCord * columns + (xCord - 1)].isEmpty) {
-                    moveAnimal(cellList,xCord,yCord,xCord - 1,yCord ,columns);
+                    moveAnimal(cellList, xCord, yCord, xCord - 1, yCord, columns);
                 } else {
                     Position newPos = {xCord - 1, yCord};
                     for (Organism *otherOrganism: organismList) {
@@ -47,10 +54,11 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                         }
                     }
                 }
+                actionDone = true;
                 break;
             case 's': // Move down
                 if (yCord < rows - 1 && cellList[(yCord + 1) * columns + xCord].isEmpty) {
-                    moveAnimal(cellList,xCord,yCord,xCord,yCord + 1,columns);
+                    moveAnimal(cellList, xCord, yCord, xCord, yCord + 1, columns);
                 } else {
                     Position newPos = {xCord, yCord + 1};
                     for (Organism *otherOrganism: organismList) {
@@ -60,10 +68,11 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                         }
                     }
                 }
+                actionDone = true;
                 break;
             case 'd': // Move right
                 if (xCord < columns - 1 && cellList[yCord * columns + (xCord + 1)].isEmpty) {
-                    moveAnimal(cellList,xCord,yCord,xCord + 1,yCord ,columns);
+                    moveAnimal(cellList, xCord, yCord, xCord + 1, yCord, columns);
                 } else {
                     Position newPos = {xCord + 1, yCord};
                     for (Organism *otherOrganism: organismList) {
@@ -73,14 +82,45 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                         }
                     }
                 }
+                actionDone = true;
                 break;
-            default:
-                cout << "Invalid move. Please use W, A, S, or D." << endl;
+            case 'h':
+                if (!abilityIsActive) {
+                    cout << "Magical potion activated" << endl;
+                    abilityIsActive = true;
+                    abilityDuration = 1;
+                    this->SetStrength(strength + 5);
+                    Action(cellList, organismList, world, rows, columns);
+                } else
+                    cout << "Ability is already active" << endl;
+                actionDone = true;
+                break;
+        }
+        if (actionDone)
+            roundCounting();
+        else {
+            cout << "Invalid key. Please use W, A, S, D or H." << endl;
+            Action(cellList, organismList, world, rows, columns);
         }
     }
+}
+
+void Human::roundCounting() {
+    if (abilityIsActive) {
+        abilityDuration++;
+        this->SetStrength(--strength);
+        return;
+    } else if (abilityIsActive && abilityDuration == 5) {
+        abilityIsActive = false;
+        abilityCooldown = 5;
+        if (strength >= 8)
+            this->SetStrength(8);
+        else
+            this->SetStrength(5);
+    } else if (!abilityIsActive && abilityCooldown > 0)
+        abilityCooldown--;
 }
 
 Human::~Human() {
     cout << "Human was killed" << endl;
 }
-

@@ -5,11 +5,9 @@
 #include "Animal.h"
 #include "Human.h"
 
-void animalStatsInit(); //set basic stats for animals
-
-void plantStatsInit(); //set basic stats for plants
-
 void ageIncrease(Organism &organism);
+
+void changeIsBaby(Organism & organism);
 
 void nameDisplay();
 
@@ -21,8 +19,8 @@ void worldInit(int &rows, int &columns);
 
 bool operator==(const Position& lhs, const Position& rhs);
 
-void gameLoop(World &world); //main game loop
+void gameLoop(World &world); //main game loop <-- Has to be changed !!
 
-void clearScreen(); //<-- Has to be changed
+void clearScreen(); //<-- Has to be changed!!
 
 #endif //CODE_GENERALFUNCTIONS_H

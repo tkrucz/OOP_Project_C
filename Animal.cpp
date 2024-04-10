@@ -4,11 +4,13 @@
 
 using namespace std;
 
-Animal::Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name)
-        : Organism(strength, initiative, age, position), name(name) {}
+Animal::Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name, bool isBaby)
+        : Organism(strength, initiative, age, position), name(name), isBaby(false) {}
 
 void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
+    if(isBaby)
+        return;
     if (name == antelope)
         numActions = 2; // Antelope move twice
     if (name == turtle) {
@@ -133,15 +135,13 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
 
         if (predatorStr >= defenderStr) {
             // Predator wins the fight
-            cout << "Predator " << nameToString() << " attacked and defeated ";
-            cout << otherAnimal->nameToString() << endl;
+            cout << "Predator " << nameToString() << " attacked and defeated " << otherAnimal->nameToString() << endl;
             world.removeOrganism(otherOrganism);
             // Move to the defender's position
             moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
         } else {
             // Defender wins the fight
-            cout << "Defender " << otherAnimal->nameToString() << " defeated ";
-            cout << nameToString() << endl;
+            cout << "Defender " << otherAnimal->nameToString() << " defeated " << nameToString() << endl;
             world.removeOrganism(this);
             // Remove predator from the current position
             cellList[(yCord * columns) + xCord].isEmpty = true;
@@ -203,6 +203,14 @@ AnimalSpecies Animal::GetName() {
     return name;
 }
 
+bool Animal::GetIsBaby() {
+    return isBaby;
+}
+
+void Animal::SetIsNoBaby() {
+    isBaby=false;
+}
+
 void Animal::moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns) {
     cellList[(yCord * columns) + xCord].isEmpty = true;
     xCord = newX;
@@ -238,22 +246,22 @@ void Animal::breeding(vector<Cell> &cellList, Organism *otherOrganism, World &wo
     switch (freeCells[index]) {
         case 1: {
             Position newAnimalPosiiton = {xCord + 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 2: {
             Position newAnimalPosiiton = {xCord - 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 3: {
             Position newAnimalPosiiton = {xCord, yCord + 1};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 4: {
             Position newAnimalPosiiton = {xCord, yCord - 1};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
     }

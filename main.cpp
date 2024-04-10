@@ -14,11 +14,11 @@ int main() {
 
     World world(rows, columns);
 
-    Animal w(9, 5, 0, {1, 0}, AnimalSpecies::wolf);
-    Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
-    Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox);
-    Animal a(4, 4, 0, {0, 4}, AnimalSpecies::antelope);
-    Animal t(2, 1, 0, {3, 0}, AnimalSpecies::turtle);
+    Animal w(9, 5, 0, {1, 0}, AnimalSpecies::wolf,false);
+    Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep,false);
+    Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox,false);
+    Animal a(4, 4, 0, {0, 4}, AnimalSpecies::antelope,false);
+    Animal t(2, 1, 0, {3, 0}, AnimalSpecies::turtle,false);
 
     Human h({3,3});
 

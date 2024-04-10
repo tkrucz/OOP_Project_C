@@ -4,31 +4,17 @@
 
 using namespace std;
 
-void animalStatsInit() {
-    Animal wolf1(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
-    Animal wolf2(9, 5, 0, {0, 0}, AnimalSpecies::wolf);
-    Animal sheep1(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
-    Animal sheep2(4, 4, 0, {0, 0}, AnimalSpecies::sheep);
-    Animal fox1(3, 7, 0, {0, 0}, AnimalSpecies::fox);
-    Animal fox2(3, 7, 0, {0, 0}, AnimalSpecies::fox);
-    Animal turtle1(2, 1, 0, {0, 0}, AnimalSpecies::turtle);
-    Animal turtle2(2, 1, 0, {0, 0}, AnimalSpecies::turtle);
-    Animal antelope1(4, 4, 0, {0, 0}, AnimalSpecies::antelope);
-    Animal antelope2(4, 4, 0, {0, 0}, AnimalSpecies::antelope);
-
-};
-
-void plantStatsInit() {
-    Plant grass(0, 0, {0, 0}, PlantSpecies::grass);
-    Plant sow_thistle(0, 0, {0, 0}, PlantSpecies::sowThistle);
-    Plant guarana(0, 0, {0, 0}, PlantSpecies::guarana);
-    Plant belladonna(99, 0, {0, 0}, PlantSpecies::belladonna);
-    Plant Sosnowskys_hogweed(10, 0, {0, 0}, PlantSpecies::sosnowskysHogweed);
-}
-
 void ageIncrease(Organism &organism) {
     int tmp = organism.GetAge();
     organism.SetAge(tmp + 1);
+}
+
+void changeIsBaby(Organism &organism) {
+    if (auto *animal = dynamic_cast<Animal *>(&organism)) {
+        bool tmp = animal->GetIsBaby();
+        if(tmp)
+            animal->SetIsNoBaby();
+    }
 }
 
 void nameDisplay() {
@@ -98,5 +84,5 @@ void gameLoop(World &world) {
 }
 
 void clearScreen() {
-    system("cls");
+    system("cls"); //?
 }
