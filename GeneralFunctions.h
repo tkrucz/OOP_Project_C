@@ -21,7 +21,7 @@ void gameLoop(World &world); //main game loop <-- Has to be changed !!
 
 void clearScreen(); //<-- Has to be changed!!
 
-void saveGame(World & world, int &rows, int &columns, Organism &organism);
+void saveGame(World & world, int &rows, int &columns, Organism *organism);
 
 void loadGame();
 

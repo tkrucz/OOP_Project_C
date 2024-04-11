@@ -11,6 +11,8 @@ public:
 
     void Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) override;
 
+    void abilityActivation();
+
     void roundCounting();
 
     ~Human();

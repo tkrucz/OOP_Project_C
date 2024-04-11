@@ -1,6 +1,7 @@
 #include "GeneralFunctions.h"
 #include "World.h"
 #include "iostream"
+#include "fstream"
 
 using namespace std;
 
@@ -83,14 +84,14 @@ void clearScreen() {
     system("cls"); //?
 }
 
-void saveGame(World & world, int &rows, int &columns, Organism &organism){
-
+void saveGame(World & world, int &rows, int &columns, Organism *organism) {
+    ofstream saveFile("save.txt", std::ios::out); //Open file or create it
+    saveFile.close(); // Close the file
 }
 
 void loadGame(){
 
 }
-
 bool operator==(const Position &lhs, const Position &rhs) {
     return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
 }

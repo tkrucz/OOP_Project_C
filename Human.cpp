@@ -86,10 +86,7 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 break;
             case 'h':
                 if (!abilityIsActive) {
-                    cout << "Magical potion activated" << endl;
-                    abilityIsActive = true;
-                    abilityDuration = 1;
-                    this->SetStrength(strength + 5);
+                    abilityActivation();
                     Action(cellList, organismList, world, rows, columns);
                 } else
                     cout << "Ability is already active" << endl;
@@ -103,6 +100,13 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
             Action(cellList, organismList, world, rows, columns);
         }
     }
+}
+
+void Human::abilityActivation() {
+    cout << "Magical potion activated" << endl;
+    abilityIsActive = true;
+    abilityDuration = 1;
+    this->SetStrength(strength + 5);
 }
 
 void Human::roundCounting() {
