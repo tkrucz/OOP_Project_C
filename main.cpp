@@ -2,10 +2,7 @@
 #include "ctime"
 #include "cstdlib"
 
-int main() {
-    //animalStatsInit(); Necessary ?
-    //plantStatsInit(); Necessary ?
-
+int main(){
     srand(time(NULL));
     char key;
     int rows, columns;

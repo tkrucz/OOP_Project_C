@@ -54,10 +54,6 @@ void worldInit(int &rows, int &columns) {
     cout << endl;
 }
 
-bool operator==(const Position &lhs, const Position &rhs) {
-    return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
-}
-
 void gameLoop(World &world) {
     char input;
     bool running = true;
@@ -85,4 +81,16 @@ void gameLoop(World &world) {
 
 void clearScreen() {
     system("cls"); //?
+}
+
+void saveGame(World & world, int &rows, int &columns, Organism &organism){
+
+}
+
+void loadGame(){
+
+}
+
+bool operator==(const Position &lhs, const Position &rhs) {
+    return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
 }
