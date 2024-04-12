@@ -11,7 +11,7 @@ void changeIsBaby(Organism & organism);
 
 void nameDisplay();
 
-void introduction(char& key, int &rows, int &columns);
+void introduction(char &key, int &rows, int &columns);
 
 void charDictionary();
 
@@ -21,10 +21,10 @@ void gameLoop(World &world); //main game loop <-- Has to be changed !!
 
 void clearScreen(); //<-- Has to be changed!!
 
-void saveGame(World & world, int &rows, int &columns, Organism *organism);
+void saveGame(World &world, int &rows, int &columns);
 
 void loadGame();
 
-bool operator==(const Position& lhs, const Position& rhs);
+bool operator==(const Position &lhs, const Position &rhs);
 
 #endif //CODE_GENERALFUNCTIONS_H

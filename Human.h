@@ -15,6 +15,12 @@ public:
 
     void roundCounting();
 
+    bool getAbilityIsActive();
+
+    int getAbilityCooldown();
+
+    int getAbilityDuration();
+
     ~Human();
 };
 #endif //CODE_HUMAN_H

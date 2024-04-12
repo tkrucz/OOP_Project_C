@@ -48,6 +48,7 @@ int main(){
     world.makeTurn();
     world.drawWorld();
 
+    saveGame(world,rows,columns);
     //gameLoop(world);
 
     return 0;

@@ -62,6 +62,10 @@ void World::drawWorld() const {
     cout << endl; // New line after printing the world
 }
 
+ const vector<Organism *> World::getOrganismList() const {
+    return organismList;
+}
+
 World::~World() {
     cout << "World destruction" << endl;
 }

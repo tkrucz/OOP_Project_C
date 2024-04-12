@@ -125,6 +125,18 @@ void Human::roundCounting() {
         abilityCooldown--;
 }
 
+bool Human::getAbilityIsActive() {
+    return abilityIsActive;
+}
+
+int Human::getAbilityCooldown() {
+    return abilityCooldown;
+}
+
+int Human::getAbilityDuration() {
+    return abilityDuration;
+}
+
 Human::~Human() {
     cout << "Human was killed" << endl;
 }

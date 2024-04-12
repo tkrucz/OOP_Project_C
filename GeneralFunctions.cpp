@@ -1,7 +1,6 @@
 #include "GeneralFunctions.h"
 #include "World.h"
 #include "iostream"
-#include "fstream"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ void ageIncrease(Organism &organism) {
 void changeIsBaby(Organism &organism) {
     if (auto *animal = dynamic_cast<Animal *>(&organism)) {
         bool tmp = animal->GetIsBaby();
-        if(tmp)
+        if (tmp)
             animal->SetIsNoBaby();
     }
 }
@@ -60,7 +59,7 @@ void gameLoop(World &world) {
     bool running = true;
 
     while (running) {
-        nameDisplay(); // Display any necessary information to the player
+        nameDisplay(); // Display information about author
         world.makeTurn(); // Execute a turn in the world
         world.drawWorld(); // Draw the updated state of the world
 
@@ -72,7 +71,7 @@ void gameLoop(World &world) {
                 running = false;
                 break;
             case 'k':
-                clearScreen(); // Clear the console screen
+                clearScreen();
                 break;
             default:
                 cout << "Invalid input. Please try again." << endl;
@@ -81,17 +80,45 @@ void gameLoop(World &world) {
 }
 
 void clearScreen() {
-    system("cls"); //?
+    system("cls");
 }
 
-void saveGame(World & world, int &rows, int &columns, Organism *organism) {
-    ofstream saveFile("save.txt", std::ios::out); //Open file or create it
-    saveFile.close(); // Close the file
+void saveGame(World &world, int &rows, int &columns) {
+    char filename[] = "Save.txt";
+    FILE *file = fopen(filename, "w");
+    if (file != nullptr) {
+        fprintf(file, "World size: %d, %d\n", rows, columns);
+
+        // Loop through each organism in the organismList
+        for (const auto &organism: world.getOrganismList()) {
+            if (auto *human = dynamic_cast<Human *>(organism)) {
+                fprintf(file, "%s, position: %d, %d, strength: %d \n", human->nameToString().c_str(),
+                        human->GetPosition().cord.x,
+                        human->GetPosition().cord.y,
+                        human->GetStrength());
+                fprintf(file, "AbilityIsActive: %d\n", human->getAbilityIsActive());
+                if (human->getAbilityIsActive()) {
+                    fprintf(file, "AbilityDuration: %d\n", human->getAbilityDuration());
+                    fprintf(file, "AbilityCooldown: %d\n", human->getAbilityCooldown());
+                }
+            } else if (auto *animal = dynamic_cast<Animal *>(organism)) {
+                fprintf(file, "%s, position: %d, %d, strength: %d \n", animal->nameToString().c_str(),
+                        animal->GetPosition().cord.x,
+                        animal->GetPosition().cord.y,
+                        animal->GetStrength());
+            }
+        }
+        fclose(file);
+    }
 }
 
-void loadGame(){
+void loadGame() {
+    char filename[] = "Save.txt";
+    FILE *file = fopen(filename, "r");
 
+    fclose(file);
 }
+
 bool operator==(const Position &lhs, const Position &rhs) {
     return lhs.cord.x == rhs.cord.x && lhs.cord.y == rhs.cord.y;
 }

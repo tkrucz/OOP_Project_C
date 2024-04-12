@@ -25,6 +25,8 @@ public:
 
     void drawWorld() const;
 
+    const vector<Organism *> getOrganismList() const;
+
     ~World();
 };
 
