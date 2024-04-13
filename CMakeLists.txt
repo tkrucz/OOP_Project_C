@@ -17,4 +17,22 @@ add_executable(Code main.cpp
         GeneralFunctions.cpp
         Human.h
         Human.cpp
+        Animals/Wolf.h
+        Animals/Wolf.cpp
+        Animals/Sheep.h
+        Animals/Sheep.cpp
+        Plants/Grass.h
+        Plants/Grass.cpp
+        Plants/SowThistle.h
+        Plants/SowThistle.cpp
+        Plants/Guarana.h
+        Plants/Guarana.cpp
+        Plants/Belladonna.h
+        Plants/Belladonna.cpp
+        Plants/SosnowskyHogweed.h
+        Plants/SosnowskyHogweed.cpp
+        Animals/Fox.h
+        Animals/Fox.cpp
+        Animals/Turtle.cpp
+        Animals/Antelope.cpp
 )

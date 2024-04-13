@@ -11,19 +11,19 @@ int main(){
 
     World world(rows, columns);
 
-    Animal w(9, 5, 0, {1, 0}, AnimalSpecies::wolf,false);
-    Animal s(4, 4, 0, {0, 0}, AnimalSpecies::sheep,false);
-    Animal f(3, 7, 0, {2, 2}, AnimalSpecies::fox,false);
-    Animal a(4, 4, 0, {0, 4}, AnimalSpecies::antelope,false);
-    Animal t(2, 1, 0, {3, 0}, AnimalSpecies::turtle,false);
+    Wolf w({1,0});
+    Sheep s({0,0});
+    Fox f({2, 2});
+    Antelope a({0, 4});
+    Turtle t({3, 0});
 
     Human h({3,3});
 
-    Plant p(0, 0, {1, 2}, PlantSpecies::grass);
-    Plant sT(0, 0, {1, 5}, PlantSpecies::sowThistle);
-    Plant g(0, 0, {3, 2}, PlantSpecies::guarana);
-    Plant b(99, 0, {4, 0}, PlantSpecies::belladonna);
-    Plant sH(10, 0, {4, 4}, PlantSpecies::sosnowskysHogweed);
+    Grass g({1,2});
+    SowThistle sT({1, 5});
+    Guarana gu({3, 2});
+    Belladonna b({4, 0});
+    SosnowskyHogweed sH({4, 4});
 
     world.addOrganism(&w, w.GetPosition());
     world.addOrganism(&s, s.GetPosition());
@@ -32,9 +32,9 @@ int main(){
     world.addOrganism(&t,t.GetPosition());
     world.addOrganism(&h,h.GetPosition());
 
-    world.addOrganism(&p, p.GetPosition());
-    world.addOrganism(&sT, sT.GetPosition());
     world.addOrganism(&g, g.GetPosition());
+    world.addOrganism(&sT, sT.GetPosition());
+    world.addOrganism(&gu, gu.GetPosition());
     world.addOrganism(&b, b.GetPosition());
     world.addOrganism(&sH, sH.GetPosition());
 

@@ -5,7 +5,7 @@
 using namespace std;
 
 Human::Human(const Position &position)
-        : Animal(5, 4, 0, position, human, false),
+        : Animal(5, 4, position, human, false),
           abilityIsActive(false), abilityDuration(0), abilityCooldown(0) {}
 
 void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {

@@ -10,7 +10,7 @@ private:
     AnimalSpecies name;
     bool isBaby;
 public:
-    Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name, bool isBaby);
+    Animal(int strength, int initiative, const Position &position, AnimalSpecies name, bool isBaby);
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 

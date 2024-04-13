@@ -4,8 +4,8 @@
 
 using namespace std;
 
-Plant::Plant(int strength, int age, const Position &position, PlantSpecies name)
-        : Organism(strength, 0, age, position), name(name) {}
+Plant::Plant(int strength, const Position &position, PlantSpecies name)
+        : Organism(strength, 0, 0, position), name(name) {}
 
 void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
@@ -35,22 +35,22 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 case 1:
                     xCord++;
                     newPlantPosition = {xCord, yCord};
-                    world.addOrganism(new Plant(strength, 0, newPlantPosition, name), newPlantPosition);
+                    world.addOrganism(new Plant(strength, newPlantPosition, name), newPlantPosition);
                     break;
                 case 2:
                     xCord--;
                     newPlantPosition = {xCord, yCord};
-                    world.addOrganism(new Plant(strength, 0, newPlantPosition, name), newPlantPosition);
+                    world.addOrganism(new Plant(strength, newPlantPosition, name), newPlantPosition);
                     break;
                 case 3:
                     yCord++;
                     newPlantPosition = {xCord, yCord};
-                    world.addOrganism(new Plant(strength, 0, newPlantPosition, name), newPlantPosition);
+                    world.addOrganism(new Plant(strength, newPlantPosition, name), newPlantPosition);
                     break;
                 case 4:
                     yCord--;
                     newPlantPosition = {xCord, yCord};
-                    world.addOrganism(new Plant(strength, 0, newPlantPosition, name), newPlantPosition);
+                    world.addOrganism(new Plant(strength, newPlantPosition, name), newPlantPosition);
                     break;
             }
         }
@@ -65,7 +65,7 @@ void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &wo
             animal->SetStrength(animal->GetStrength() + 3);
             cout << "Predator " << animal->nameToString() << " ate guarana and gained 3 strength!" << endl;
         } else if (name == belladonna || name == sosnowskysHogweed) {
-            // Belladonna or Sosnowsky's hogweed: Kills the animal
+            // Belladonna or SosnowskyHogweed's hogweed: Kills the animal
             cout << "Predator " << animal->nameToString() << " ate " << nameToString() << " and died!" << endl;
             world.removeOrganism(animal);
             // Remove animal from its current position

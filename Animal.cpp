@@ -4,8 +4,8 @@
 
 using namespace std;
 
-Animal::Animal(int strength, int initiative, int age, const Position &position, AnimalSpecies name, bool isBaby)
-        : Organism(strength, initiative, age, position), name(name), isBaby(false) {}
+Animal::Animal(int strength, int initiative, const Position &position, AnimalSpecies name, bool isBaby)
+        : Organism(strength, initiative, 0, position), name(name), isBaby(false) {}
 
 void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
@@ -265,22 +265,22 @@ void Animal::breeding(vector<Cell> &cellList, Organism *otherOrganism, World &wo
     switch (freeCells[index]) {
         case 1: {
             Position newAnimalPosiiton = {xCord + 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 2: {
             Position newAnimalPosiiton = {xCord - 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 3: {
             Position newAnimalPosiiton = {xCord, yCord + 1};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
         case 4: {
             Position newAnimalPosiiton = {xCord, yCord - 1};
-            world.addOrganism(new Animal(strength, initiative, 0, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
             break;
         }
     }

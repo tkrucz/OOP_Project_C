@@ -2,8 +2,19 @@
 #define CODE_GENERALFUNCTIONS_H
 
 #include "Plant.h"
+#include "Plants/Grass.h"
+#include "Plants/SowThistle.h"
+#include "Plants/Guarana.h"
+#include "Plants/Belladonna.h"
+#include "Plants/SosnowskyHogweed.h"
+
 #include "Animal.h"
 #include "Human.h"
+#include "Animals/Wolf.h"
+#include "Animals/Sheep.h"
+#include "Animals/Fox.h"
+#include "Animals/Antelope.h"
+#include "Animals/Turtle.h"
 
 void ageIncrease(Organism &organism);
 

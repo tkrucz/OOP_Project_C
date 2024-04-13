@@ -10,7 +10,7 @@ class Plant : public Organism {
 private:
     PlantSpecies name;
 public:
-    Plant(int strength, int age, const Position &position, PlantSpecies name);
+    Plant(int strength, const Position &position, PlantSpecies name);
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 
