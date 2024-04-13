@@ -199,6 +199,25 @@ string Animal::nameToString() {
     }
 }
 
+AnimalSpecies Animal::nameFromString(std::string stringName) {
+    if(stringName == "wolf")
+        return wolf;
+    else if(stringName == "sheep")
+        return sheep;
+    else if(stringName == "fox")
+        return fox;
+    else if(stringName == "turtle")
+        return turtle;
+    else if(stringName == "antelope")
+        return antelope;
+    else if(stringName == "human")
+        return human;
+}
+
+void Animal::SetName(std::string stringName) {
+    name = nameFromString(stringName);
+}
+
 AnimalSpecies Animal::GetName() {
     return name;
 }

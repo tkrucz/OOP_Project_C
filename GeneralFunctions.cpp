@@ -71,16 +71,14 @@ void gameLoop(World &world) {
                 running = false;
                 break;
             case 'k':
-                clearScreen();
+                world.clearConsole();
                 break;
             default:
                 cout << "Invalid input. Please try again." << endl;
         }
     }
-}
-
-void clearScreen() {
-    system("cls");
+    world.clearConsole();
+    cout << "Game finished." << endl;
 }
 
 void saveGame(World &world, int &rows, int &columns) {
@@ -92,7 +90,7 @@ void saveGame(World &world, int &rows, int &columns) {
         // Loop through each organism in the organismList
         for (const auto &organism: world.getOrganismList()) {
             if (auto *human = dynamic_cast<Human *>(organism)) {
-                fprintf(file, "%s, position: %d, %d, strength: %d \n", human->nameToString().c_str(),
+                fprintf(file, "%s, position: %d, %d, strength: %d\n", human->nameToString().c_str(),
                         human->GetPosition().cord.x,
                         human->GetPosition().cord.y,
                         human->GetStrength());
@@ -102,21 +100,64 @@ void saveGame(World &world, int &rows, int &columns) {
                     fprintf(file, "AbilityCooldown: %d\n", human->getAbilityCooldown());
                 }
             } else if (auto *animal = dynamic_cast<Animal *>(organism)) {
-                fprintf(file, "%s, position: %d, %d, strength: %d \n", animal->nameToString().c_str(),
+                fprintf(file, "%s, position: %d, %d, strength: %d\n", animal->nameToString().c_str(),
                         animal->GetPosition().cord.x,
                         animal->GetPosition().cord.y,
                         animal->GetStrength());
+            } else if (auto *plant = dynamic_cast<Plant *>(organism)) {
+                fprintf(file, "%s, position: %d, %d\n", plant->nameToString().c_str(),
+                        plant->GetPosition().cord.x,
+                        plant->GetPosition().cord.y);
             }
         }
         fclose(file);
     }
 }
 
-void loadGame() {
+void loadGame(World &world) {
+    char filename[] = "Save.txt";
+    FILE *file = fopen(filename, "r");
+    for (int i = 0; i < checkFileLength(); i++) {
+        if (i == 0) {
+            int rows, columns;
+            fscanf(file, "World size: %d, %d\n", &rows, &columns);
+            world = World(rows, columns);
+        } else {
+            string organismName;
+            int x, y, strength;
+            bool abilityIsActive;
+            int abilityDuration, abilityCooldown;
+            fscanf(file, "%s, position: %d, %d", &organismName, &x, &y);
+            Position position = {x,y};
+            if (organismName == "wolf" || organismName == "sheep" || organismName == "antelope" ||
+                organismName == "fox" || organismName == "turtle" || organismName == "human") {
+                Animal *newAnimal;
+                newAnimal->SetPosition(position);
+                newAnimal->SetName(organismName);
+            }
+            else if(organismName == "grass" || organismName == "guarana" || organismName == "sow thistle" ||
+                    organismName == "belladonna" || organismName == "sosnowsky's hogweed"){
+                Plant* newPlant;
+                newPlant->SetPosition(position);
+                newPlant->SetName(organismName);
+            }
+        }
+    }
+    fclose(file);
+}
+
+int checkFileLength() {
+    int rowsNumber = 0;
+    int character;
     char filename[] = "Save.txt";
     FILE *file = fopen(filename, "r");
 
+    while ((character = fgetc(file)) != EOF) {
+        if (character == '\n')
+            rowsNumber++;
+    }
     fclose(file);
+    return rowsNumber;
 }
 
 bool operator==(const Position &lhs, const Position &rhs) {

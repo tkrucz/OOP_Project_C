@@ -40,7 +40,6 @@ int main(){
 
     nameDisplay();
     world.drawWorld(); //First world visualization
-
     world.makeTurn();
     world.drawWorld();
     world.makeTurn();

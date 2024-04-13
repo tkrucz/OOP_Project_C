@@ -10,8 +10,8 @@ add_executable(Code main.cpp
         Organism.cpp
         Define.cpp
         Animal.h
-        Plant.h
         Animal.cpp
+        Plant.h
         Plant.cpp
         GeneralFunctions.h
         GeneralFunctions.cpp

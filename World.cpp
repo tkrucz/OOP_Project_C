@@ -32,7 +32,7 @@ void World::makeTurn() {
     for (Organism *organism: organismList) {
         organism->Action(cellList, organismList, *this, rows, cols);
     }
-    for(Organism *organism: organismList) {
+    for (Organism *organism: organismList) {
         changeIsBaby(*organism);
     }
     for (Organism *organism: organismList) {
@@ -62,8 +62,12 @@ void World::drawWorld() const {
     cout << endl; // New line after printing the world
 }
 
- const vector<Organism *> World::getOrganismList() const {
+const vector<Organism *> World::getOrganismList() const {
     return organismList;
+}
+
+void World::clearConsole() const {
+    cout << "\33[2J\033[H";
 }
 
 World::~World() {

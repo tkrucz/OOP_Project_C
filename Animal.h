@@ -22,6 +22,10 @@ public:
 
     AnimalSpecies GetName() override;
 
+    AnimalSpecies nameFromString(string stringName);
+
+    void SetName(string stringName);
+
     bool GetIsBaby();
 
     void SetIsNoBaby();
