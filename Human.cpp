@@ -129,12 +129,24 @@ bool Human::getAbilityIsActive() {
     return abilityIsActive;
 }
 
+void Human::setAbilityIsActive(bool value) {
+    abilityIsActive = value;
+}
+
 int Human::getAbilityCooldown() {
     return abilityCooldown;
 }
 
+void Human::setAbilityCooldown(int value) {
+    abilityCooldown=value;
+}
+
 int Human::getAbilityDuration() {
     return abilityDuration;
+}
+
+void Human::setAbilityDuration(int value) {
+    abilityDuration=value;
 }
 
 Human::~Human() {

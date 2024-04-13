@@ -22,9 +22,7 @@ public:
 
     AnimalSpecies GetName() override;
 
-    PlantSpecies nameFromString(string stringName);
-
-    void SetName(string stringName);
+    int GetEnum();
 
     void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns); //INCORRECT
 

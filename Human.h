@@ -17,9 +17,15 @@ public:
 
     bool getAbilityIsActive();
 
+    void setAbilityIsActive(bool value);
+
     int getAbilityCooldown();
 
+    void setAbilityCooldown(int value);
+
     int getAbilityDuration();
+
+    void setAbilityDuration(int value);
 
     ~Human();
 };

@@ -108,23 +108,20 @@ string Plant::nameToString() {
     }
 }
 
-PlantSpecies Plant::nameFromString(std::string stringName) {
-    if(stringName == "grass")
-            return grass;
-    else if(stringName == "guarana")
-        return guarana;
-    else if(stringName == "sow thistle")
-        return sowThistle;
-    else if(stringName == "belladonna")
-        return belladonna;
-    else if(stringName == "sosnowsky's hogweed")
-        return sosnowskysHogweed;
+int Plant::GetEnum() {
+    switch (name) {
+        case grass:
+            return 0;
+        case sowThistle:
+            return 1;
+        case belladonna:
+            return 3;
+        case sosnowskysHogweed:
+            return 4;
+        default:
+            return 2;
+    }
 }
-
-void Plant::SetName(std::string stringName) {
-    name = nameFromString(stringName);
-}
-
 //Kills every animal in its immediate neighborhood
 void Plant::sosnowskysAction(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows,
                              int &columns) {

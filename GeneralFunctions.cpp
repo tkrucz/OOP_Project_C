@@ -1,3 +1,4 @@
+#include <cstring>
 #include "GeneralFunctions.h"
 #include "World.h"
 #include "iostream"
@@ -87,10 +88,9 @@ void saveGame(World &world, int &rows, int &columns) {
     if (file != nullptr) {
         fprintf(file, "World size: %d, %d\n", rows, columns);
 
-        // Loop through each organism in the organismList
         for (const auto &organism: world.getOrganismList()) {
             if (auto *human = dynamic_cast<Human *>(organism)) {
-                fprintf(file, "%s, position: %d, %d, strength: %d\n", human->nameToString().c_str(),
+                fprintf(file, "H, position: %d, %d, strength: %d\n",
                         human->GetPosition().cord.x,
                         human->GetPosition().cord.y,
                         human->GetStrength());
@@ -100,12 +100,12 @@ void saveGame(World &world, int &rows, int &columns) {
                     fprintf(file, "AbilityCooldown: %d\n", human->getAbilityCooldown());
                 }
             } else if (auto *animal = dynamic_cast<Animal *>(organism)) {
-                fprintf(file, "%s, position: %d, %d, strength: %d\n", animal->nameToString().c_str(),
+                fprintf(file, "A%d, position: %d, %d, strength: %d\n", animal->GetEnum(),
                         animal->GetPosition().cord.x,
                         animal->GetPosition().cord.y,
                         animal->GetStrength());
             } else if (auto *plant = dynamic_cast<Plant *>(organism)) {
-                fprintf(file, "%s, position: %d, %d\n", plant->nameToString().c_str(),
+                fprintf(file, "P%d, position: %d, %d\n", plant->GetEnum(),
                         plant->GetPosition().cord.x,
                         plant->GetPosition().cord.y);
             }
@@ -114,50 +114,97 @@ void saveGame(World &world, int &rows, int &columns) {
     }
 }
 
-void loadGame(World &world) {
+World loadGame() {
     char filename[] = "Save.txt";
     FILE *file = fopen(filename, "r");
-    for (int i = 0; i < checkFileLength(); i++) {
-        if (i == 0) {
-            int rows, columns;
-            fscanf(file, "World size: %d, %d\n", &rows, &columns);
-            world = World(rows, columns);
-        } else {
-            string organismName;
-            int x, y, strength;
-            bool abilityIsActive;
-            int abilityDuration, abilityCooldown;
-            fscanf(file, "%s, position: %d, %d", &organismName, &x, &y);
-            Position position = {x,y};
-            if (organismName == "wolf" || organismName == "sheep" || organismName == "antelope" ||
-                organismName == "fox" || organismName == "turtle" || organismName == "human") {
-                Animal *newAnimal;
-                newAnimal->SetPosition(position);
-                newAnimal->SetName(organismName);
-            }
-            else if(organismName == "grass" || organismName == "guarana" || organismName == "sow thistle" ||
-                    organismName == "belladonna" || organismName == "sosnowsky's hogweed"){
-                Plant* newPlant;
-                newPlant->SetPosition(position);
-                newPlant->SetName(organismName);
-            }
+
+    int rows, columns;
+    fscanf(file, "World size: %d, %d\n", &rows, &columns);
+    World world(rows, columns);
+
+    char organismName;
+    int x, y, strength=0;
+
+    while (fscanf(file, "%c, position: %d, %d, strength: %d\n", &organismName, &x, &y, &strength) != EOF ) {
+        Position position = {x, y};
+        Organism *newOrganism = nullptr;
+
+        switch (organismName) {
+            case 'H': // Human
+                bool bLAbilityIsActive;
+                int abilityIsActive, abilityDuration, abilityCooldown;
+                newOrganism = new Human(position);
+                fscanf(file, "AbilityIsActive: %d\n", &abilityIsActive);
+                bLAbilityIsActive = abilityIsActive;
+                if (bLAbilityIsActive) {
+                    fscanf(file, "AbilityDuration: %d\n", &abilityDuration);
+                    fscanf(file, "AbilityCooldown: %d\n", &abilityCooldown);
+                    Human *humanPtr = dynamic_cast<Human *>(newOrganism);
+                    if (humanPtr) {
+                        humanPtr->setAbilityIsActive(true);
+                        humanPtr->setAbilityDuration(abilityDuration);
+                        humanPtr->setAbilityCooldown(abilityCooldown);
+                    }
+                }
+                break;
+            case 'A': // Animal
+                int animalType;
+                fscanf(file, "%d, position: %d, %d\n", &animalType, &x, &y);
+                switch (animalType) {
+                    case 0:
+                        newOrganism = new Wolf(position);
+                        break;
+                    case 1:
+                        newOrganism = new Sheep(position);
+                        break;
+                    case 2:
+                        newOrganism = new Fox(position);
+                        break;
+                    case 3:
+                        newOrganism = new Turtle(position);
+                        break;
+                    case 4:
+                        newOrganism = new Antelope(position);
+                        break;
+                    default:
+                        break;
+                }
+                fscanf(file, "strength: %d\n", &strength);
+                break;
+            case 'P': // Plant
+                int plantType;
+                fscanf(file, "%d, position: %d, %d\n", &plantType, &x, &y);
+                switch (plantType) {
+                    case 0:
+                        newOrganism = new Grass(position);
+                        break;
+                    case 1:
+                        newOrganism = new SowThistle(position);
+                        break;
+                    case 3:
+                        newOrganism = new Belladonna(position);
+                        break;
+                    case 4:
+                        newOrganism = new SosnowskyHogweed(position);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
         }
-    }
-    fclose(file);
-}
 
-int checkFileLength() {
-    int rowsNumber = 0;
-    int character;
-    char filename[] = "Save.txt";
-    FILE *file = fopen(filename, "r");
-
-    while ((character = fgetc(file)) != EOF) {
-        if (character == '\n')
-            rowsNumber++;
+        if (newOrganism != nullptr) {
+            if(strength != 0)
+                newOrganism->SetStrength(strength);
+            world.addOrganism(newOrganism, position);
+        }
+        strength=0;
     }
+
     fclose(file);
-    return rowsNumber;
+    return world;
 }
 
 bool operator==(const Position &lhs, const Position &rhs) {

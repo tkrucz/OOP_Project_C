@@ -199,23 +199,21 @@ string Animal::nameToString() {
     }
 }
 
-AnimalSpecies Animal::nameFromString(std::string stringName) {
-    if(stringName == "wolf")
-        return wolf;
-    else if(stringName == "sheep")
-        return sheep;
-    else if(stringName == "fox")
-        return fox;
-    else if(stringName == "turtle")
-        return turtle;
-    else if(stringName == "antelope")
-        return antelope;
-    else if(stringName == "human")
-        return human;
-}
-
-void Animal::SetName(std::string stringName) {
-    name = nameFromString(stringName);
+int Animal::GetEnum() {
+    switch (name) {
+        case wolf:
+            return 0;
+        case sheep:
+            return 1;
+        case fox:
+            return 2;
+        case turtle:
+            return 3;
+        case antelope:
+            return 4;
+        default:
+            return 5;
+    }
 }
 
 AnimalSpecies Animal::GetName() {

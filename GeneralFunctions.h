@@ -32,9 +32,7 @@ void gameLoop(World &world); //main game loop <-- Has to be changed !!
 
 void saveGame(World &world, int &rows, int &columns);
 
-void loadGame(World &world);
-
-int checkFileLength();
+World loadGame();
 
 bool operator==(const Position &lhs, const Position &rhs);
 

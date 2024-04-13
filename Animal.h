@@ -22,9 +22,7 @@ public:
 
     AnimalSpecies GetName() override;
 
-    AnimalSpecies nameFromString(string stringName);
-
-    void SetName(string stringName);
+    int GetEnum();
 
     bool GetIsBaby();
 
