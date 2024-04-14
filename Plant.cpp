@@ -30,7 +30,8 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
                 freeCells[index++] = 3;
             if (yCord - 1 >= 0 && cellList[((yCord - 1) * columns) + xCord].isEmpty)
                 freeCells[index++] = 4;
-            index = rand() % index;
+            if(index != 0)
+                index = rand() % index;
             switch (freeCells[index]) {
                 case 1:
                     xCord++;
@@ -57,7 +58,8 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
     }
 }
 
-void Plant::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) {
+void Plant::Collision(vector<Cell> &cellList, vector<Organism *> &organismList, Organism *otherOrganism, World &world,
+                      int &rows, int &columns) {
     if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
         // Handle collision based on the type of plant
         if (name == guarana) {
@@ -162,6 +164,4 @@ AnimalSpecies Plant::GetName() {
     return notAnimal;
 }
 
-Plant::~Plant() {
-    cout << "Plant withered" << endl;
-}
+Plant::~Plant() {}

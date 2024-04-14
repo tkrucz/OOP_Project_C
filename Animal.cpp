@@ -9,7 +9,7 @@ Animal::Animal(int strength, int initiative, const Position &position, AnimalSpe
 
 void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int numActions = 1;
-    if(isBaby)
+    if (isBaby)
         return;
     if (name == antelope)
         numActions = 2; // Antelope move twice
@@ -39,7 +39,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                         Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList,
                                                                          columns);
                         if (otherOrganism)
-                            Collision(cellList, otherOrganism, world, rows, columns);
+                            Collision(cellList, organismList, otherOrganism, world, rows, columns);
                         moveAnimal(cellList, xCord, yCord, xCord + 1, yCord, columns);
                         return;
                     }
@@ -48,7 +48,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                     Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList,
                                                                      columns);
                     if (otherOrganism)
-                        Collision(cellList, otherOrganism, world, rows, columns);
+                        Collision(cellList, organismList, otherOrganism, world, rows, columns);
                 }
                 break;
             case 2:
@@ -58,7 +58,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                         Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList,
                                                                          columns);
                         if (otherOrganism)
-                            Collision(cellList, otherOrganism, world, rows, columns);
+                            Collision(cellList, organismList, otherOrganism, world, rows, columns);
                         moveAnimal(cellList, xCord, yCord, xCord - 1, yCord, columns);
                         return;
                     }
@@ -67,7 +67,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                     Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList,
                                                                      columns);
                     if (otherOrganism)
-                        Collision(cellList, otherOrganism, world, rows, columns);
+                        Collision(cellList, organismList, otherOrganism, world, rows, columns);
                 }
                 break;
             case 3:
@@ -77,7 +77,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                         Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList,
                                                                          columns);
                         if (otherOrganism)
-                            Collision(cellList, otherOrganism, world, rows, columns);
+                            Collision(cellList, organismList, otherOrganism, world, rows, columns);
                         moveAnimal(cellList, xCord, yCord, xCord, yCord + 1, columns);
                         return;
                     }
@@ -86,7 +86,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                     Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList,
                                                                      columns);
                     if (otherOrganism)
-                        Collision(cellList, otherOrganism, world, rows, columns);
+                        Collision(cellList, organismList, otherOrganism, world, rows, columns);
                 }
                 break;
             case 4:
@@ -96,7 +96,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                         Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList,
                                                                          columns);
                         if (otherOrganism)
-                            Collision(cellList, otherOrganism, world, rows, columns);
+                            Collision(cellList, organismList, otherOrganism, world, rows, columns);
                         moveAnimal(cellList, xCord, yCord, xCord, yCord - 1, columns);
                         return;
                     }
@@ -105,19 +105,28 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
                     Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList,
                                                                      columns);
                     if (otherOrganism)
-                        Collision(cellList, otherOrganism, world, rows, columns);
+                        Collision(cellList, organismList, otherOrganism, world, rows, columns);
                 }
                 break;
         }
     }
 }
 
-void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) {
+void Animal::Collision(vector<Cell> &cellList, vector<Organism *> &organismList, Organism *otherOrganism, World &world,
+                       int &rows, int &columns) {
     int predatorStr = strength;
     int defenderStr = otherOrganism->GetStrength();
     int xCord = position.cord.x, yCord = position.cord.y;
     Position occupiedCell = otherOrganism->GetPosition();
 
+    if (name == antelope) {
+        int probability = rand() % 100;
+        if (probability < 50) {
+            cout << "Antelope escape from fight" << endl;
+            Action(cellList, organismList, world, rows, columns); //Antelope escape
+        }
+        return;
+    }
     // Check if the other organism is an animal
     if (auto *otherAnimal = dynamic_cast<Animal *>(otherOrganism)) {
         if (otherAnimal->GetName() == turtle) {
@@ -125,9 +134,10 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
             if (predatorStr < 5) {
                 // Turtle successfully defends by reflecting the attack
                 cout << "Turtle reflects the attack of " << nameToString() << endl;
-                return; // Predator stays on its previous cell
             }
+            return; // Predator stays on its previous cell
         }
+        //Check if other animal is the same
         if (otherAnimal->GetName() == name) {
             breeding(cellList, otherAnimal, world, rows, columns);
             return;
@@ -151,7 +161,7 @@ void Animal::Collision(vector<Cell> &cellList, Organism *otherOrganism, World &w
     else if (auto *otherPlant = dynamic_cast<Plant *>(otherOrganism)) {
         if (otherPlant->nameToString() == "guarana" || otherPlant->nameToString() == "belladonna"
             || otherPlant->nameToString() == "sosnowsky's hogweed")
-            otherPlant->Collision(cellList, this, world, rows, columns);
+            otherPlant->Collision(cellList, organismList, this, world, rows, columns);
         else {
             cout << "Predator " << nameToString() << " ate ";
             cout << otherPlant->nameToString() << endl;
@@ -224,8 +234,12 @@ bool Animal::GetIsBaby() {
     return isBaby;
 }
 
+void Animal::SetIsBaby() {
+    isBaby=true;
+}
+
 void Animal::SetIsNoBaby() {
-    isBaby=false;
+    isBaby = false;
 }
 
 void Animal::moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns) {
@@ -247,7 +261,7 @@ bool Animal::isStronger(vector<Cell> &cellList, vector<Organism *> &organismList
     return false;
 }
 
-void Animal::breeding(vector<Cell> &cellList, Organism *otherOrganism, World &world, int rows, int columns) {
+void Animal::breeding(vector<Cell> &cellList, Animal *otherAnimal, World &world, int rows, int columns) {
     int xCord = position.cord.x, yCord = position.cord.y;
     int freeCells[4] = {0, 0, 0, 0};
     int index = 0;
@@ -263,28 +277,27 @@ void Animal::breeding(vector<Cell> &cellList, Organism *otherOrganism, World &wo
     switch (freeCells[index]) {
         case 1: {
             Position newAnimalPosiiton = {xCord + 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name, true), newAnimalPosiiton);
             break;
         }
         case 2: {
             Position newAnimalPosiiton = {xCord - 1, yCord};
-            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name, true), newAnimalPosiiton);
             break;
         }
         case 3: {
             Position newAnimalPosiiton = {xCord, yCord + 1};
-            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name, true), newAnimalPosiiton);
             break;
         }
         case 4: {
             Position newAnimalPosiiton = {xCord, yCord - 1};
-            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name,true), newAnimalPosiiton);
+            world.addOrganism(new Animal(strength, initiative, newAnimalPosiiton, name, true), newAnimalPosiiton);
             break;
         }
     }
     cout << "New animal " << nameToString() << " was born" << endl;
+    otherAnimal->SetIsBaby();
 }
 
-Animal::~Animal() {
-    cout << "Animal was killed" << endl;
-}
+Animal::~Animal() {}

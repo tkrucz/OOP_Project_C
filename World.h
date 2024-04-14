@@ -27,7 +27,7 @@ public:
 
     const vector<Organism *> getOrganismList() const;
 
-    void clearConsole() const; //ANSI... still not working
+    void clearConsole(); //ANSI... still not working
 
     ~World();
 };

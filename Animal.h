@@ -14,7 +14,7 @@ public:
 
     void Action(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns) override;
 
-    void Collision(vector<Cell> &cellList, Organism *otherOrganism, World &world, int &rows, int &columns) override;
+    void Collision(vector<Cell> &cellList, vector<Organism*> &organismList, Organism *otherOrganism, World &world, int &rows, int &columns) override;
 
     char Draw() override;
 
@@ -26,13 +26,15 @@ public:
 
     bool GetIsBaby();
 
+    void SetIsBaby();
+
     void SetIsNoBaby();
 
     void moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns);
 
     bool isStronger(vector<Cell> &cellList, vector<Organism*> &organismList, int newX, int newY, int strength, int columns);
 
-    void breeding(vector<Cell> &cellList, Organism *otherOrganism, World &world, int rows, int columns); //DONE?
+    void breeding(vector<Cell> &cellList, Animal *otherAnimal, World &world, int rows, int columns); //DONE?
 
     ~Animal() ;
 };

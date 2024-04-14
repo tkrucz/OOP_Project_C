@@ -32,11 +32,11 @@ void Organism::SetPosition(const Position &newPosition) {
     position = newPosition;
 }
 
-Organism *Organism::findOrganismAtPosition(const Position &position, const std::vector<Organism *> &organismList,
-                                           const std::vector<Cell> &cellList, int columns) {
+Organism *Organism::findOrganismAtPosition(const Position &position, const vector<Organism *> &organismList,
+                                           const vector<Cell> &cellList, int columns) {
     int xCord = position.cord.x;
     int yCord = position.cord.y;
-    const Cell &cell = cellList[(yCord * columns) + xCord];
+    Cell cell = cellList[(yCord * columns) + xCord];
 
     if (cell.isEmpty) {
         return nullptr;

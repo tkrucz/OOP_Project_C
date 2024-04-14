@@ -66,8 +66,8 @@ const vector<Organism *> World::getOrganismList() const {
     return organismList;
 }
 
-void World::clearConsole() const {
-    cout << "\33[2J\033[H";
+void World::clearConsole() {
+    system("cls");
 }
 
 World::~World() {
