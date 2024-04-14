@@ -114,12 +114,14 @@ int Plant::GetEnum() {
             return 0;
         case sowThistle:
             return 1;
+        case guarana:
+            return 2;
         case belladonna:
             return 3;
         case sosnowskysHogweed:
             return 4;
         default:
-            return 2;
+            return 5;
     }
 }
 //Kills every animal in its immediate neighborhood

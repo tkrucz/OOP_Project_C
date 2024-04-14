@@ -123,16 +123,18 @@ World loadGame() {
     World world(rows, columns);
 
     char organismName;
-    int x, y, strength=0;
+    int x, y, strength = 0;
 
-    while (fscanf(file, "%c, position: %d, %d, strength: %d\n", &organismName, &x, &y, &strength) != EOF ) {
-        Position position = {x, y};
+    while (fscanf(file, "%c", &organismName) != EOF) {
+        Position position;
         Organism *newOrganism = nullptr;
 
         switch (organismName) {
             case 'H': // Human
                 bool bLAbilityIsActive;
                 int abilityIsActive, abilityDuration, abilityCooldown;
+                fscanf(file, ", position: %d, %d, strength: %d\n", &x, &y, &strength);
+                position = {x, y};
                 newOrganism = new Human(position);
                 fscanf(file, "AbilityIsActive: %d\n", &abilityIsActive);
                 bLAbilityIsActive = abilityIsActive;
@@ -149,7 +151,8 @@ World loadGame() {
                 break;
             case 'A': // Animal
                 int animalType;
-                fscanf(file, "%d, position: %d, %d\n", &animalType, &x, &y);
+                fscanf(file, "%d, position: %d, %d, strength: %d\n", &animalType, &x, &y, &strength);
+                position = {x, y};
                 switch (animalType) {
                     case 0:
                         newOrganism = new Wolf(position);
@@ -169,17 +172,20 @@ World loadGame() {
                     default:
                         break;
                 }
-                fscanf(file, "strength: %d\n", &strength);
                 break;
             case 'P': // Plant
                 int plantType;
                 fscanf(file, "%d, position: %d, %d\n", &plantType, &x, &y);
+                position = {x, y};
                 switch (plantType) {
                     case 0:
                         newOrganism = new Grass(position);
                         break;
                     case 1:
                         newOrganism = new SowThistle(position);
+                        break;
+                    case 2:
+                        newOrganism = new Guarana(position);
                         break;
                     case 3:
                         newOrganism = new Belladonna(position);
@@ -196,11 +202,11 @@ World loadGame() {
         }
 
         if (newOrganism != nullptr) {
-            if(strength != 0)
+            if (strength != 0)
                 newOrganism->SetStrength(strength);
             world.addOrganism(newOrganism, position);
         }
-        strength=0;
+        strength = 0;
     }
 
     fclose(file);
