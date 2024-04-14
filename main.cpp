@@ -49,7 +49,7 @@ int main(){
 //    world.drawWorld();
 //
 //    saveGame(world,rows,columns);
-    gameLoop(world);
+    gameLoop(world,rows,columns);
 
     return 0;
 }

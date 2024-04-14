@@ -24,12 +24,15 @@ void nameDisplay() {
 
 void introduction(char &key, int &rows, int &columns) {
     cout << "Author: Tomasz Kruczalak 198049 \nWelcome to World Simulator ! " << endl;
-    cout << "Keys binding : \nm - symbols meaning \ns - start game";
+    cout << "Keys binding : \nm - symbols meaning \ns - start game\nl - load game";
     cout << endl;
     key = char(getchar());
     while (key != 's') {
         if (key == 'm') {
             charDictionary();
+            break;
+        } else if (key == 'l') { //jakoś to trzbea rozegrać
+            loadGame();
             break;
         } else if (key != '\n')
             cout << "Wrong key" << endl;
@@ -55,7 +58,7 @@ void worldInit(int &rows, int &columns) {
     cout << endl;
 }
 
-void gameLoop(World &world) {
+void gameLoop(World &world, int &rows, int &columns) {
     char input;
     bool running = true;
 
@@ -64,11 +67,15 @@ void gameLoop(World &world) {
         world.makeTurn(); // Execute a turn in the world
         world.drawWorld(); // Draw the updated state of the world
 
-        cout << "Press 'q' to quit, 'k' to clear screen and proceed to next turn: ";
+        cout << "Press 'q' to quit, 's' to save game or 'k' to clear screen and proceed to next turn: ";
         cin >> input;
 
         switch (input) {
             case 'q':
+                running = false;
+                break;
+            case 's':
+                saveGame(world, rows, columns);
                 running = false;
                 break;
             case 'k':

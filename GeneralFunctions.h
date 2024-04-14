@@ -28,7 +28,7 @@ void charDictionary();
 
 void worldInit(int &rows, int &columns);
 
-void gameLoop(World &world); //main game loop <-- Has to be changed !!
+void gameLoop(World &world, int &rows, int &columns);
 
 void saveGame(World &world, int &rows, int &columns);
 
