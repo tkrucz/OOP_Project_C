@@ -4,8 +4,6 @@
 #include "Organism.h"
 #include "Define.cpp"
 
-class World;
-
 class Plant : public Organism {
 private:
     PlantSpecies name;
@@ -22,9 +20,7 @@ public:
 
     AnimalSpecies GetName() override;
 
-    int GetEnum();
-
-    void sosnowskysAction(vector<Cell> &cellList, vector<Organism*> &organismList, World &world, int &rows, int &columns); //INCORRECT
+    int GetEnum() override;
 
     ~Plant() ;
 };

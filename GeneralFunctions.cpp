@@ -31,7 +31,7 @@ void introduction(char &key, int &rows, int &columns) {
         if (key == 'm') {
             charDictionary();
             break;
-        } else if (key == 'l') { //jakoś to trzbea rozegrać
+        } else if (key == 'l') { //TO DO !
             loadGame();
             break;
         } else if (key != '\n')

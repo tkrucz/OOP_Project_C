@@ -40,15 +40,9 @@ int main(){
     world.addOrganism(&sH, sH.GetPosition());
 
     nameDisplay();
-    world.drawWorld(); //First world visualization
-//    world.makeTurn();
-//    world.drawWorld();
-//    world.makeTurn();
-//    world.drawWorld();
-//    world.makeTurn();
-//    world.drawWorld();
-//
-//    saveGame(world,rows,columns);
+    world.drawWorld();
+
+//  saveGame(world,rows,columns);
     gameLoop(world,rows,columns);
 
     return 0;

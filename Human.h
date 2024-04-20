@@ -11,6 +11,12 @@ public:
 
     void Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) override;
 
+    char Draw() override;
+
+    string nameToString() override;
+
+    int GetEnum() override;
+
     void abilityActivation();
 
     void roundCounting();
@@ -26,6 +32,8 @@ public:
     int getAbilityDuration();
 
     void setAbilityDuration(int value);
+
+    void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
 
     ~Human();
 };

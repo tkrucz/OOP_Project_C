@@ -30,7 +30,7 @@ void World::makeTurn() {
         return a->GetInitiative() > b->GetInitiative();
     });
     for (Organism *organism: organismList) {
-        organism->Action(cellList, organismList, *this, rows, cols);
+       organism->Action(cellList, organismList, *this, rows, cols);
     }
     for (Organism *organism: organismList) {
         changeIsBaby(*organism);

@@ -102,6 +102,18 @@ void Human::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
     }
 }
 
+char Human::Draw() {
+    return 'H';
+}
+
+string Human::nameToString() {
+    return "human";
+}
+
+int Human::GetEnum() {
+    return 5;
+}
+
 void Human::abilityActivation() {
     cout << "Magical potion activated" << endl;
     abilityIsActive = true;
@@ -148,5 +160,7 @@ int Human::getAbilityDuration() {
 void Human::setAbilityDuration(int value) {
     abilityDuration = value;
 }
+
+void Human::breeding(vector<Cell> &cellList, World &world, int rows, int columns) {}
 
 Human::~Human() {}

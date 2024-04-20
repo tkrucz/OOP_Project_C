@@ -3,7 +3,6 @@
 
 #include "Organism.h"
 #include "Define.cpp"
-class World;
 
 class Animal : public Organism {
 private:
@@ -22,7 +21,7 @@ public:
 
     AnimalSpecies GetName() override;
 
-    int GetEnum();
+    int GetEnum() override;
 
     bool GetIsBaby();
 
@@ -32,9 +31,7 @@ public:
 
     void moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX, int newY, int columns);
 
-    bool isStronger(vector<Cell> &cellList, vector<Organism*> &organismList, int newX, int newY, int strength, int columns);
-
-    void breeding(vector<Cell> &cellList, Animal *otherAnimal, World &world, int rows, int columns); //DONE?
+    virtual void breeding(vector<Cell> &cellList, World &world, int rows, int columns) = 0;
 
     ~Animal() ;
 };

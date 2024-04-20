@@ -39,6 +39,8 @@ public:
 
     virtual char Draw()  = 0;
 
+    virtual int GetEnum() = 0;
+
     virtual string nameToString() = 0;
 
     virtual AnimalSpecies GetName() = 0;
