@@ -42,9 +42,9 @@ Organism *Organism::findOrganismAtPosition(const Position &position, const vecto
         return nullptr;
     }
 
-    for (Organism *organism : organismList) {
-        if (organism->GetPosition() == cell.cellCord) {
-            return organism;
+    for (int i=0; i<organismList.size() ; i++) {
+        if (organismList[i]->GetPosition() == cell.cellCord) {
+            return organismList[i];
         }
     }
     return nullptr;

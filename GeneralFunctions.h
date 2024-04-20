@@ -32,7 +32,7 @@ void gameLoop(World &world, int &rows, int &columns);
 
 void saveGame(World &world, int &rows, int &columns);
 
-World loadGame();
+World loadGame(int &rows, int &columns);
 
 bool operator==(const Position &lhs, const Position &rhs);
 

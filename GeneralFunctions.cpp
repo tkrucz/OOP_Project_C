@@ -31,9 +31,9 @@ void introduction(char &key, int &rows, int &columns) {
         if (key == 'm') {
             charDictionary();
             break;
-        } else if (key == 'l') { //TO DO !
-            loadGame();
-            break;
+        } else if (key == 'l') {
+            loadGame(rows,columns);
+            return;
         } else if (key != '\n')
             cout << "Wrong key" << endl;
         key = char(getchar());
@@ -121,11 +121,10 @@ void saveGame(World &world, int &rows, int &columns) {
     }
 }
 
-World loadGame() {
+World loadGame(int &rows, int &columns) {
     char filename[] = "Save.txt";
     FILE *file = fopen(filename, "r");
 
-    int rows, columns;
     fscanf(file, "World size: %d, %d\n", &rows, &columns);
     World world(rows, columns);
 

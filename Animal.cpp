@@ -149,6 +149,8 @@ void Animal::moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX
     xCord = newX;
     yCord = newY;
     cellList[(yCord * columns) + xCord].isEmpty = false;
+    cellList[(yCord * columns) + xCord].cellCord.cord.x = xCord;
+    cellList[(yCord * columns) + xCord].cellCord.cord.y = yCord;
     position.cord.x = xCord;
     position.cord.y = yCord;
 }

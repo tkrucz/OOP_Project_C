@@ -29,14 +29,14 @@ void World::makeTurn() {
         }
         return a->GetInitiative() > b->GetInitiative();
     });
-    for (Organism *organism: organismList) {
-       organism->Action(cellList, organismList, *this, rows, cols);
+    for(int i=0; i<organismList.size() ; i++) {
+        organismList[i]->Action(cellList, organismList, *this, rows, cols);
     }
-    for (Organism *organism: organismList) {
-        changeIsBaby(*organism);
+    for (int i=0; i<organismList.size() ; i++) {
+        changeIsBaby(*organismList[i]);
     }
-    for (Organism *organism: organismList) {
-        ageIncrease(*organism);
+    for (int i=0; i<organismList.size() ; i++) {
+        ageIncrease(*organismList[i]);
     }
 }
 
