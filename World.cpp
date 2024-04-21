@@ -70,6 +70,9 @@ void World::clearConsole() {
     system("cls");
 }
 
-World::~World() {
-    cout << "World destruction" << endl;
+void World::deallocate() {
+    cellList.clear();
+    organismList.clear();
 }
+
+World::~World() {}

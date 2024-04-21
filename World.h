@@ -29,6 +29,8 @@ public:
 
     void clearConsole();
 
+    void deallocate();
+
     ~World();
 };
 

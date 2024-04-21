@@ -86,6 +86,7 @@ void gameLoop(World &world, int &rows, int &columns) {
         }
     }
     world.clearConsole();
+    world.deallocate();
     cout << "Game finished." << endl;
 }
 
