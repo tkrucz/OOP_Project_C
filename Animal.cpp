@@ -81,8 +81,8 @@ void Animal::Collision(vector<Cell> &cellList, vector<Organism *> &organismList,
             if (predatorStr < 5) {
                 // Turtle successfully defends by reflecting the attack
                 cout << "Turtle reflects the attack of " << nameToString() << endl;
+                return; // Predator stays on its previous cell
             }
-            return; // Predator stays on its previous cell
         }
         //Check if other animal is the same
         if (otherAnimal->GetName() == name) {
