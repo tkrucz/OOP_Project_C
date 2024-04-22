@@ -16,6 +16,7 @@ void World::addOrganism(Organism *newOrganism, const Position &position) {
 void World::removeOrganism(Organism *organism) {
     for (auto i = organismList.begin(); i != organismList.end(); ++i) {
         if (*i == organism) {
+            //delete *i.base(); coś tam nie ma bazowego destruktora
             organismList.erase(i);
             break;
         }
@@ -68,11 +69,6 @@ const vector<Organism *> World::getOrganismList() const {
 
 void World::clearConsole() {
     system("cls");
-}
-
-void World::deallocate() {
-    cellList.clear();
-    organismList.clear();
 }
 
 World::~World() {}
