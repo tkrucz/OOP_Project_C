@@ -25,9 +25,9 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
     index = rand() % index;
     switch (possibleMoves[index]) {
         case 1:
-            if (cellList[(yCord * columns) + xCord + 1].isEmpty){
+            if (cellList[(yCord * columns) + xCord + 1].isEmpty){ // If cell is empty, move animal
                 moveAnimal(cellList, xCord, yCord, xCord + 1, yCord, columns);
-            } else { //Checking the collision for this cell
+            } else { // Execute collision for this cell
                 Organism *otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList,
                                                                  columns);
                 if (otherOrganism)
@@ -37,7 +37,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
         case 2:
             if (cellList[(yCord * columns) + xCord - 1].isEmpty){
                 moveAnimal(cellList, xCord, yCord, xCord - 1, yCord, columns);
-            } else { //Checking the collision for this cell
+            } else {
                 Organism *otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList,
                                                                  columns);
                 if (otherOrganism)
@@ -47,7 +47,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
         case 3:
             if (cellList[((yCord + 1) * columns) + xCord].isEmpty){
                 moveAnimal(cellList, xCord, yCord, xCord, yCord + 1, columns);
-            } else { //Checking the collision for this cell
+            } else {
                 Organism *otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList,
                                                                  columns);
                 if (otherOrganism)
@@ -57,7 +57,7 @@ void Animal::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wo
         case 4:
             if (cellList[((yCord - 1) * columns) + xCord].isEmpty){
                 moveAnimal(cellList, xCord, yCord, xCord, yCord - 1, columns);
-            } else { //Checking the collision for this cell
+            } else {
                 Organism *otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList,
                                                                  columns);
                 if (otherOrganism)
@@ -76,35 +76,29 @@ void Animal::Collision(vector<Cell> &cellList, vector<Organism *> &organismList,
 
     // Check if the other organism is an animal
     if (auto *otherAnimal = dynamic_cast<Animal *>(otherOrganism)) {
-        if (otherAnimal->GetName() == turtle) {
-            // If the defender is a turtle, handle turtle's defense
+        if (otherAnimal->GetName() == turtle) { // If defender is a turtle, handle turtle's defense
             if (predatorStr < 5) {
-                // Turtle successfully defends by reflecting the attack
                 cout << "Turtle reflects the attack of " << nameToString() << endl;
                 return; // Predator stays on its previous cell
             }
         }
-        //Check if other animal is the same
-        if (otherAnimal->GetName() == name) {
+        if (otherAnimal->GetName() == name) {  //Check if other animal is the same
             breeding(cellList, world, rows, columns);
             return;
         }
-        //Execute fight
-        if (predatorStr >= defenderStr) {
-            // Predator wins the fight
+        if (predatorStr >= defenderStr) {         //Execute fight
             cout << "Predator " << nameToString() << " attacked and defeated " << otherAnimal->nameToString() << endl;
             // Move to the defender's position
             moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
             world.removeOrganism(otherOrganism);
         } else {
-            // Defender wins the fight
             cout << "Defender " << otherAnimal->nameToString() << " defeated " << nameToString() << endl;
             // Remove predator from the current position
             cellList[(yCord * columns) + xCord].isEmpty = true;
             world.removeOrganism(this);
         }
     }
-        // If the other organism is a plant, animal eats the plant
+    // Check if the other organism is a plant
     else if (auto *otherPlant = dynamic_cast<Plant *>(otherOrganism)) {
         if (otherPlant->nameToString() == "guarana" || otherPlant->nameToString() == "belladonna"
             || otherPlant->nameToString() == "sosnowsky's hogweed")

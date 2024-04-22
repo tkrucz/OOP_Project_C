@@ -5,11 +5,11 @@ SowThistle::SowThistle(const Position &position) : Plant(0, position, sowThistle
 void SowThistle::Action(vector<Cell> &cellList, vector<Organism *> &organismList, World &world, int &rows, int &columns) {
     int chances = 3;
     for(int i=0; i<chances; i++){
-        int probability = rand() % 10;
+        int probability = rand() % 100;
         int xCord = position.cord.x, yCord = position.cord.y;
         int freeCells[4] = {0, 0, 0, 0};
         Position newPlantPosition;
-        if (probability < 1) {
+        if (probability < 10) {
             int index = 0;
             if (xCord + 1 < columns && cellList[(yCord * columns) + xCord + 1].isEmpty)
                 freeCells[index++] = 1;

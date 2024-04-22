@@ -6,8 +6,7 @@ int main(){
     srand(time(NULL));
     char key;
     int rows, columns;
-//    World world = loadGame();
-//    world.drawWorld();
+//    World world = loadGame(rows,columns);
 
     introduction(key, rows, columns);
 
@@ -43,7 +42,6 @@ int main(){
     nameDisplay();
     world.drawWorld();
 
-//  saveGame(world,rows,columns);
     gameLoop(world,rows,columns);
 
     return 0;

@@ -10,7 +10,7 @@ void Plant::Action(vector<Cell> &cellList, vector<Organism *> &organismList, Wor
 
 void Plant::Collision(vector<Cell> &cellList, vector<Organism *> &organismList, Organism *otherOrganism, World &world,
                       int &rows, int &columns) {
-    // Remove plant from its current position
+    // Set that cell is empty
     cellList[(position.cord.y * columns) + position.cord.x].isEmpty = true;
     // Remove the plant from the world after being eaten
     world.removeOrganism(this);
