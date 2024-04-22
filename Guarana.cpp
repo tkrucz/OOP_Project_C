@@ -66,5 +66,3 @@ string Guarana::nameToString() {
 int Guarana::GetEnum() {
     return 2;
 }
-
-Guarana::~Guarana() {};

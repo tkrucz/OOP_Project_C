@@ -93,18 +93,18 @@ void Animal::Collision(vector<Cell> &cellList, vector<Organism *> &organismList,
         if (predatorStr >= defenderStr) {
             // Predator wins the fight
             cout << "Predator " << nameToString() << " attacked and defeated " << otherAnimal->nameToString() << endl;
-            world.removeOrganism(otherOrganism);
             // Move to the defender's position
             moveAnimal(cellList, xCord, yCord, occupiedCell.cord.x, occupiedCell.cord.y, columns);
+            world.removeOrganism(otherOrganism);
         } else {
             // Defender wins the fight
             cout << "Defender " << otherAnimal->nameToString() << " defeated " << nameToString() << endl;
-            world.removeOrganism(this);
             // Remove predator from the current position
             cellList[(yCord * columns) + xCord].isEmpty = true;
+            world.removeOrganism(this);
         }
     }
-    // If the other organism is a plant, animal eats the plant
+        // If the other organism is a plant, animal eats the plant
     else if (auto *otherPlant = dynamic_cast<Plant *>(otherOrganism)) {
         if (otherPlant->nameToString() == "guarana" || otherPlant->nameToString() == "belladonna"
             || otherPlant->nameToString() == "sosnowsky's hogweed")
@@ -156,5 +156,3 @@ void Animal::moveAnimal(vector<Cell> &cellList, int &xCord, int &yCord, int newX
 }
 
 void Animal::breeding(vector<Cell> &cellList, World &world, int rows, int columns) {}
-
-Animal::~Animal() {}

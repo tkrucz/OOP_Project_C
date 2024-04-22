@@ -6,6 +6,10 @@ using namespace std;
 
 World::World(int numRows, int numCols) : rows(numRows), cols(numCols), cellList(numRows * numCols), organismList(0) {}
 
+void World::addOnlyOrganism(Organism *organism) {
+    addOrganism(organism,organism->GetPosition());
+}
+
 void World::addOrganism(Organism *newOrganism, const Position &position) {
     newOrganism->SetPosition(position);
     organismList.push_back(newOrganism);
@@ -16,11 +20,11 @@ void World::addOrganism(Organism *newOrganism, const Position &position) {
 void World::removeOrganism(Organism *organism) {
     for (auto i = organismList.begin(); i != organismList.end(); ++i) {
         if (*i == organism) {
-            //delete *i.base(); coś tam nie ma bazowego destruktora
             organismList.erase(i);
             break;
         }
     }
+    delete organism;
 }
 
 void World::makeTurn() {

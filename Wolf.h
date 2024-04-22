@@ -15,8 +15,6 @@ public:
     int GetEnum() override;
 
     void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
-
-    ~Wolf();
 };
 
 #endif //CODE_WOLF_H

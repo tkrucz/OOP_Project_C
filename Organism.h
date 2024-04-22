@@ -45,7 +45,7 @@ public:
 
     virtual AnimalSpecies GetName() = 0;
 
-    ~Organism();
+    virtual ~Organism() = default;
 };
 
 #endif //CODE_ORGANISM_H

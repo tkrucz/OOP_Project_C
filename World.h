@@ -17,6 +17,8 @@ private:
 public:
     World(int numRows, int numCols);
 
+    void addOnlyOrganism(Organism *organism);
+
     void addOrganism(Organism *organism, const Position &position);
 
     void removeOrganism(Organism *organism);

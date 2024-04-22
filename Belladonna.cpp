@@ -51,9 +51,9 @@ void Belladonna::Collision(vector<Cell> &cellList, vector<Organism *> &organismL
                       int &rows, int &columns) {
     if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
         cout << "Predator " << animal->nameToString() << " ate belladonna and died!" << endl;
+        cellList[(animal->GetPosition().cord.y * columns) + animal->GetPosition().cord.x].isEmpty = true;
         // Remove animal from its current position
         world.removeOrganism(animal);
-        cellList[(animal->GetPosition().cord.y * columns) + animal->GetPosition().cord.x].isEmpty = true;
     }
     Plant::Collision(cellList,organismList,otherOrganism,world,rows,columns);
 }
@@ -69,5 +69,3 @@ string Belladonna::nameToString() {
 int Belladonna::GetEnum() {
     return 3;
 }
-
-Belladonna::~Belladonna() {}

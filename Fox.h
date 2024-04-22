@@ -19,8 +19,6 @@ public:
     bool checkOpponent(vector<Cell> &cellList, vector<Organism *> &organismList, int newX, int newY, int columns);
 
     void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
-
-    ~Fox();
 };
 
 #endif //CODE_FOX_H

@@ -19,8 +19,6 @@ public:
     int GetEnum() override;
 
     void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
-
-    ~Antelope();
 };
 
 #endif //CODE_ANTELOPE_H

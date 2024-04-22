@@ -49,5 +49,3 @@ Organism *Organism::findOrganismAtPosition(const Position &position, const vecto
     }
     return nullptr;
 }
-
-Organism::~Organism() {}

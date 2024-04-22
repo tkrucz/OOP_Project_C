@@ -13,32 +13,32 @@ int main(){
 
     World world(rows, columns);
 
-    Wolf w({1,0});
-    Sheep s({0,0});
-    Fox f({2, 2});
-    Antelope a({0, 4});
-    Turtle t({3, 0});
+    auto *w = new Wolf ({1,0});
+    auto *s = new Sheep ({0,0});
+    auto *f = new Fox ({2, 2});
+    auto *a = new Antelope ({0, 4});
+    auto *t = new Turtle ({3, 0});
 
-    Human h({3,3});
+    auto *h = new Human ({3,3});
 
-    Grass g({1,2});
-    SowThistle sT({1, 5});
-    Guarana gu({3, 2});
-    Belladonna b({4, 0});
-    SosnowskyHogweed sH({4, 4});
+    auto *g = new Grass ({1,2});
+    auto * sT = new SowThistle ({1, 5});
+    auto * gu = new Guarana ({3, 2});
+    auto *b = new Belladonna ({4, 0});
+    auto *sH = new SosnowskyHogweed ({4, 4});
 
-    world.addOrganism(&w, w.GetPosition());
-    world.addOrganism(&s, s.GetPosition());
-    world.addOrganism(&f, f.GetPosition());
-    world.addOrganism(&a,a.GetPosition());
-    world.addOrganism(&t,t.GetPosition());
-    world.addOrganism(&h,h.GetPosition());
+    world.addOnlyOrganism(w);
+    world.addOnlyOrganism(s);
+    world.addOnlyOrganism(f);
+    world.addOnlyOrganism(a);
+    world.addOnlyOrganism(t);
+    world.addOnlyOrganism(h);
 
-    world.addOrganism(&g, g.GetPosition());
-    world.addOrganism(&sT, sT.GetPosition());
-    world.addOrganism(&gu, gu.GetPosition());
-    world.addOrganism(&b, b.GetPosition());
-    world.addOrganism(&sH, sH.GetPosition());
+    world.addOnlyOrganism(g);
+    world.addOnlyOrganism(sT);
+    world.addOnlyOrganism(gu);
+    world.addOnlyOrganism(b);
+    world.addOnlyOrganism(sH);
 
     nameDisplay();
     world.drawWorld();

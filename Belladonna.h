@@ -17,8 +17,6 @@ public:
     string nameToString() override;
 
     int GetEnum() override;
-
-    ~Belladonna();
 };
 
 #endif //CODE_BELLADONNA_H

@@ -71,5 +71,3 @@ void Turtle::breeding(vector<Cell> &cellList, World &world, int rows, int column
     }
     cout << "New animal " << nameToString() << " was born" << endl;
 }
-
-Turtle::~Turtle() {};

@@ -17,8 +17,6 @@ public:
     int GetEnum() override;
 
     void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
-
-    ~Turtle();
 };
 
 #endif //CODE_TURTLE_H

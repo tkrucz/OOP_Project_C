@@ -21,8 +21,6 @@ public:
     AnimalSpecies GetName() override;
 
     int GetEnum() override;
-
-    ~Plant() ;
 };
 
 #endif //CODE_PLANT_H

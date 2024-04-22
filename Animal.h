@@ -33,7 +33,6 @@ public:
 
     virtual void breeding(vector<Cell> &cellList, World &world, int rows, int columns) = 0;
 
-    ~Animal() ;
 };
 
 #endif //CODE_ANIMAL_H

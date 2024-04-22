@@ -13,6 +13,7 @@ void SosnowskyHogweed::Action(vector<Cell> &cellList, vector<Organism *> &organi
     if (yCord - 1 >= 0 && !cellList[((yCord - 1) * columns) + xCord].isEmpty) {
         otherOrganism = findOrganismAtPosition({xCord, yCord - 1}, organismList, cellList, columns);
         if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
+            cout << "Sosnowsky's hogweed kill " << otherOrganism->nameToString() << endl;
             world.removeOrganism(animal);
             cellList[((yCord - 1) * columns) + xCord].isEmpty = true;
         }
@@ -20,6 +21,7 @@ void SosnowskyHogweed::Action(vector<Cell> &cellList, vector<Organism *> &organi
     if (yCord + 1 < rows && !cellList[((yCord + 1) * columns) + xCord].isEmpty) {
         otherOrganism = findOrganismAtPosition({xCord, yCord + 1}, organismList, cellList, columns);
         if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
+            cout << "Sosnowsky's hogweed kill " << otherOrganism->nameToString() << endl;
             world.removeOrganism(animal);
             cellList[((yCord + 1) * columns) + xCord].isEmpty = true;
         }
@@ -27,6 +29,7 @@ void SosnowskyHogweed::Action(vector<Cell> &cellList, vector<Organism *> &organi
     if (xCord - 1 >= 0 && !cellList[(yCord * columns) + (xCord - 1)].isEmpty) {
         otherOrganism = findOrganismAtPosition({xCord - 1, yCord}, organismList, cellList, columns);
         if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
+            cout << "Sosnowsky's hogweed kill " << otherOrganism->nameToString() << endl;
             world.removeOrganism(animal);
             cellList[(yCord * columns) + (xCord - 1)].isEmpty = true;
         }
@@ -34,21 +37,19 @@ void SosnowskyHogweed::Action(vector<Cell> &cellList, vector<Organism *> &organi
     if (xCord + 1 < columns && !cellList[(yCord * columns) + (xCord + 1)].isEmpty) {
         otherOrganism = findOrganismAtPosition({xCord + 1, yCord}, organismList, cellList, columns);
         if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
+            cout << "Sosnowsky's hogweed kill " << otherOrganism->nameToString() << endl;
             world.removeOrganism(animal);
             cellList[(yCord * columns) + (xCord + 1)].isEmpty = true;
         }
     }
-    if(otherOrganism)
-        cout << "Sosnowsky's hogweed kill " << otherOrganism->nameToString() << endl;
 }
 
 void SosnowskyHogweed::Collision(vector<Cell> &cellList, vector<Organism *> &organismList, Organism *otherOrganism,
                                  World &world, int &rows, int &columns) {
     if (auto *animal = dynamic_cast<Animal *>(otherOrganism)) {
             cout << "Predator " << animal->nameToString() << " ate sosnowsky's hogweed and died!" << endl;
-            world.removeOrganism(animal);
-            // Remove animal from its current position
             cellList[(animal->GetPosition().cord.y * columns) + animal->GetPosition().cord.x].isEmpty = true;
+            world.removeOrganism(animal);
         }
     Plant::Collision(cellList,organismList,otherOrganism,world,rows,columns);
 }
@@ -64,5 +65,3 @@ string SosnowskyHogweed::nameToString() {
 int SosnowskyHogweed::GetEnum() {
     return 4;
 }
-
-SosnowskyHogweed::~SosnowskyHogweed() {};

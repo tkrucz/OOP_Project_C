@@ -15,8 +15,6 @@ public:
     string nameToString() override;
 
     int GetEnum() override;
-
-    ~Grass();
 };
 
 #endif //CODE_GRASS_H

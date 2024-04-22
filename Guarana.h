@@ -17,8 +17,6 @@ public:
     string nameToString() override;
 
     int GetEnum() override;
-
-    ~Guarana();
 };
 
 #endif //CODE_GUARANA_H

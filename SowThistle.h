@@ -14,8 +14,6 @@ public:
     string nameToString() override;
 
     int GetEnum() override;
-
-    ~SowThistle();
 };
 
 #endif //CODE_SOWTHISTLE_H

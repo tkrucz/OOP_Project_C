@@ -17,8 +17,6 @@ public:
     string nameToString() override;
 
     int GetEnum() override;
-
-    ~SosnowskyHogweed();
 };
 
 #endif //CODE_SOSNOWSKYHOGWEED_H

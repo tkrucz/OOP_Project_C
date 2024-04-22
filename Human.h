@@ -34,7 +34,5 @@ public:
     void setAbilityDuration(int value);
 
     void breeding(vector<Cell> &cellList, World &world, int rows, int columns) override;
-
-    ~Human();
 };
 #endif //CODE_HUMAN_H

@@ -136,5 +136,3 @@ void Fox::breeding(vector<Cell> &cellList, World &world, int rows, int columns) 
     }
     cout << "New animal " << nameToString() << " was born" << endl;
 }
-
-Fox::~Fox() {};

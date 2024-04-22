@@ -55,5 +55,3 @@ string Grass::nameToString() {
 int Grass::GetEnum() {
     return 0;
 }
-
-Grass::~Grass() {};

@@ -57,5 +57,3 @@ string SowThistle::nameToString() {
 int SowThistle::GetEnum() {
     return 1;
 }
-
-SowThistle::~SowThistle() {};

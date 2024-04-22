@@ -162,5 +162,3 @@ void Human::setAbilityDuration(int value) {
 }
 
 void Human::breeding(vector<Cell> &cellList, World &world, int rows, int columns) {}
-
-Human::~Human() {}

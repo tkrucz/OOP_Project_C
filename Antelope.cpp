@@ -77,5 +77,3 @@ void Antelope::breeding(vector<Cell> &cellList, World &world, int rows, int colu
     }
     cout << "New animal " << nameToString() << " was born" << endl;
 }
-
-Antelope::~Antelope() {};
